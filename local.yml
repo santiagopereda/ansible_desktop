@@ -8,5 +8,16 @@
         update_cache: yes
       changed_when: False
   
+<<<<<<< HEAD
+- hosts: localhost
+  become: true
+  roles:
+    - base
+=======
   tasks:
+<<<<<<< HEAD
   - include: tasks/packages.yml
+>>>>>>> parent of aee5236 (Added cron and user taskbooks)
+=======
+  - include: tasks/packages.yml
+>>>>>>> parent of aee5236 (Added cron and user taskbooks)

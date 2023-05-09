@@ -4,4 +4,6 @@
       - neofetch
       - neovim
       - ranger
+      - tmux
       - tmuxinator
+      - zsh
