@@ -12,4 +12,7 @@
   - name: Install packages
     apt:
       name: 
-        - neofetch 
+        - neofetch
+        - neovim
+        - ranger
+        - tmuxinator
