@@ -1,31 +1,29 @@
-- name: zsh
-  hosts: all
-  vars:
-    zsh_config_backup: false
-    zsh_config_overwrite: true
+- name: Get the path to ZSH
+  become: false
+  local_action: command which zsh
+  register: zsh_path
 
-    zsh_users_config:
-      - template: "templates/zshrc.j2"
-        filepath: "$HOME/.config/zsh/.zshrc"
-      - template: "templates/zshenv.j2"
-        filepath: "$HOME/.config/zsh/.zshenv"
+- name: "Ensure zsh is in allowed shells"
+  lineinfile:
+    path: /etc/shells
+    line: "{{ zsh_path.stdout }}"
+  become: true
 
-    zsh_dependencies:
-      - copybuffer
-      - copyfile
-      - copypath
-      - dirhistory
-      - git
-      - F-Sy-H
-      - history
-      - jsontools
-      - sudo
-      - web-search
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
+- name: Install Oh My ZSH
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  args:
+    creates: "/Users/{{ lookup('env', 'USER') }}/.config/oh-my-zsh"
 
-  roles:
-    - bec.shell.zsh
-  tasks:
-    ansible.builtin.debug:
-        msg: "ZSH was installed and additional functions were enabled."
+- name: "Create a default ZSH configuration"
+  template:
+    src: templates/zshenv.j2
+    dest: /Users/{{ lookup('env', 'USER') }}/.config/zsh/.zshenv
+    owner: "{{ lookup('env', 'USER') }}"
+    force: yes
+
+- name: "Create a default ZSH configuration"
+  template:
+    src: templates/.zshrc.j2
+    dest: /Users/{{ lookup('env', 'USER') }}/.config/zsh/.zshrc
+    owner: "{{ lookup('env', 'USER') }}"
+    force: yes
