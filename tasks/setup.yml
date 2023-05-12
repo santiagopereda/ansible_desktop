@@ -9,12 +9,8 @@
     line: "{{ zsh_path.stdout }}"
   become: true
 
-- name: Install Oh My ZSH
-  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  args:
-    creates: "/Users/{{ lookup('env', 'USER') }}/.config/oh-my-zsh"
-
 - name: "Create a default ZSH configuration"
+  become: false
   template:
     src: templates/zshenv.j2
     dest: /Users/{{ lookup('env', 'USER') }}/.config/zsh/.zshenv
@@ -22,6 +18,7 @@
     force: yes
 
 - name: "Create a default ZSH configuration"
+  become: false
   template:
     src: templates/.zshrc.j2
     dest: /Users/{{ lookup('env', 'USER') }}/.config/zsh/.zshrc
