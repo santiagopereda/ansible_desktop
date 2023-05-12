@@ -7,20 +7,15 @@
   lineinfile:
     path: /etc/shells
     line: "{{ zsh_path.stdout }}"
-  become: true
 
 - name: "Create a default ZSH configuration"
-  become: false
+  become: test_unit
   template:
     src: templates/zshenv.j2
     dest: $HOME/.config/zsh/.zshenv
-    owner: "{{ lookup('env', 'USER') }}"
-    force: yes
 
 - name: "Create a default ZSH configuration"
-  become: false
+  become: test_unit
   template:
     src: templates/.zshrc.j2
     dest: $HOME/.config/zsh/.zshrc
-    owner: "{{ lookup('env', 'USER') }}"
-    force: yes
