@@ -10,7 +10,6 @@
 
 - name: Set ZSH as the default shell
   become: true
-  become_user: testunit
   shell: chsh -s $(which zsh)
 
 - name: "Create ZSH directory in .config"
