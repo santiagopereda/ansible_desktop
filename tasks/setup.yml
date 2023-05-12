@@ -13,7 +13,7 @@
   become: false
   template:
     src: templates/zshenv.j2
-    dest: /Users/{{ lookup('env', 'USER') }}/.config/zsh/.zshenv
+    dest: $HOME/.config/zsh/.zshenv
     owner: "{{ lookup('env', 'USER') }}"
     force: yes
 
@@ -21,6 +21,6 @@
   become: false
   template:
     src: templates/.zshrc.j2
-    dest: /Users/{{ lookup('env', 'USER') }}/.config/zsh/.zshrc
+    dest: $HOME/.config/zsh/.zshrc
     owner: "{{ lookup('env', 'USER') }}"
     force: yes
