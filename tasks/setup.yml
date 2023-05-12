@@ -11,8 +11,7 @@
 - name: Set ZSH as the default shell
   become: true
   become_user: testunit
-    name: "{{ zsh_user }}"
-    shell: /bin/zsh
+    shell: chsh -s $(which zsh)
   when: not zsh_shared and zsh_change_user_shell
 
 - name: "Create ZSH directory in .config"
