@@ -1,0 +1,32 @@
+---
+- name: zsh
+  hosts: all
+  vars:
+    zsh_config_backup: false
+    zsh_config_overwrite: true
+
+    zsh_users_config:
+      - template: "templates/zshrc.j2"
+        filepath: "$HOME/.config/zsh/.zshrc"
+      - template: "templates/zshenv.j2"
+        filepath: "$HOME/.config/zsh/.zshenv"
+
+    zsh_dependencies:
+      - copybuffer
+      - copyfile
+      - copypath
+      - dirhistory
+      - git
+      - F-Sy-H
+      - history
+      - jsontools
+      - sudo
+      - web-search
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+
+  roles:
+    - bec.shell.zsh
+  tasks:
+    ansible.builtin.debug:
+        msg: "ZSH was installed and additional functions were enabled."
