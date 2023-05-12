@@ -5,11 +5,11 @@
   pre_tasks:
     - name: update repositories
       apt:
-        update_cache: yes
+        update_cache: true
         upgrade: yes
-        clean: yes
-        autoclean: yes
-        autoremove: yes
+        clean: true
+        autoclean: true
+        autoremove: true
       changed_when: False
   
   tasks:
