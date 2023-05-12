@@ -1,2 +1,0 @@
----
-xdg_config_file: "{{ shell_config_file | default(zsh_config_file) }}"
