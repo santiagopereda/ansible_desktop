@@ -35,6 +35,14 @@
     dest: $HOME/.config/zsh/.zshrc
     force: yes
 
+- name: "Create a default neofetch configuration"
+  become: true
+  become_user: testunit
+  template:
+    src: neofetch.j2
+    dest: $HOME/.config/neofetch/config.conf
+    force: yes
+
 - name: Creating a symlink
   become: true
   become_user: testunit
