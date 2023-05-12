@@ -12,7 +12,6 @@
   become: true
   become_user: testunit
   shell: chsh -s $(which zsh)
-  when: not zsh_shared and zsh_change_user_shell
 
 - name: "Create ZSH directory in .config"
   become: true
