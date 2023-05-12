@@ -13,7 +13,7 @@
   become_user: testunit
   file:
     path: $HOME/.config/zsh
-    state: directoy
+    state: directory
     
 - name: "Create a default ZSH configuration"
   become: true
