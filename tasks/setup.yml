@@ -36,6 +36,8 @@
     force: yes
 
 - name: Creating a symlink
+  become: true
+  become_user: testunit
   ansible.builtin.file:
     src: $HOME/.config/zsh/.zshrc
     dest: $HOME/.zshrc
