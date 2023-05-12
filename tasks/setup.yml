@@ -8,6 +8,13 @@
     path: /etc/shells
     line: "{{ zsh_path.stdout }}"
 
+- name: "Create ZSH directory in .config"
+  become: true
+  become_user: testunit
+  file:
+    path: $HOME/.config/zsh
+    state: directoy
+    
 - name: "Create a default ZSH configuration"
   become: true
   become_user: testunit
