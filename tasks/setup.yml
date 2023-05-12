@@ -39,8 +39,8 @@
   become: true
   become_user: testunit
   ansible.builtin.file:
-    src: $HOME/.config/zsh/.zshrc
-    dest: $HOME/.zshrc
+    src: $HOME/.config/zsh/.zshenv
+    dest: $HOME/.zshenv
     state: link
 
 - name: "load zsh"
