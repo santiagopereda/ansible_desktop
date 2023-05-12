@@ -6,4 +6,5 @@
       - ranger
       - tmux
       - tmuxinator
+      - xdg-user-dirs
       - zsh
