@@ -7,12 +7,16 @@
     state: directory
 
 - name: Download HackNerdFont Regular
+  become: true
+  become_user: testunit
   ansible.builtin.get_url:
     url: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf
     dest: $HOME/.local/share/fonts/NerdFonts/HackNerdFont-Regular.ttf
     mode: '0644'
 
 - name: Download HackNerdFont Regular
+  become: true
+  become_user: testunit
   ansible.builtin.get_url:
     url: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf
     dest: $HOME/.local/share/fonts/NerdFonts/HackNerdFont-Regular.ttf
