@@ -10,7 +10,10 @@
   
   tasks:
   - include: tasks/cron.yml
-  - include: tasks/packages.yml
-  - include: tasks/setup.yml
   - include: tasks/users.yml
+  - include: tasks/packages.yml
+  - include: tasks/homesetup.yml
+  - include: tasks/zshconfig.yml
+
+  
 
