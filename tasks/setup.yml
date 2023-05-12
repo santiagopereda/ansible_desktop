@@ -19,12 +19,12 @@
   become: true
   become_user: testunit
   template:
-    src: templates/zshenv.j2
+    src: zshenv.j2
     dest: $HOME/.config/zsh/.zshenv
 
 - name: "Create a default ZSH configuration"
   become: true
   become_user: testunit
   template:
-    src: templates/.zshrc.j2
+    src: zshrc.j2
     dest: $HOME/.config/zsh/.zshrc
