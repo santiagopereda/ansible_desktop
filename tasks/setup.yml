@@ -9,13 +9,15 @@
     line: "{{ zsh_path.stdout }}"
 
 - name: "Create a default ZSH configuration"
-  become: testunit
+  become: true
+  become_user: testunit
   template:
     src: templates/zshenv.j2
     dest: $HOME/.config/zsh/.zshenv
 
 - name: "Create a default ZSH configuration"
-  become: testunit
+  become: true
+  become_user: testunit
   template:
     src: templates/.zshrc.j2
     dest: $HOME/.config/zsh/.zshrc
