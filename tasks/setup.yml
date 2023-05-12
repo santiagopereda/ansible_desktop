@@ -1,4 +1,5 @@
-- name: set up the zsh-shell
+- name: zsh
+  hosts: all
   vars:
     zsh_config_backup: false
     zsh_config_overwrite: true
