@@ -8,6 +8,13 @@
     path: /etc/shells
     line: "{{ zsh_path.stdout }}"
 
+- name: Set ZSH as the default shell
+  become: true
+  become_user: testunit
+    name: "{{ zsh_user }}"
+    shell: /bin/zsh
+  when: not zsh_shared and zsh_change_user_shell
+
 - name: "Create ZSH directory in .config"
   become: true
   become_user: testunit
@@ -21,6 +28,7 @@
   template:
     src: zshenv.j2
     dest: $HOME/.config/zsh/.zshenv
+    force: yes
 
 - name: "Create a default ZSH configuration"
   become: true
@@ -28,3 +36,9 @@
   template:
     src: zshrc.j2
     dest: $HOME/.config/zsh/.zshrc
+    force: yes
+
+- name: "load zsh"
+  shell: zsh
+
+
