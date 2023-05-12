@@ -6,10 +6,15 @@
     - name: update repositories
       apt:
         update_cache: yes
+        upgrade: yes
+        clean: yes
+        autoclean: yes
+        autoremove: yes
       changed_when: False
   
   tasks:
   - include: tasks/cron.yml
+  - include: tasks/fontsetup.yml
   - include: tasks/users.yml
   - include: tasks/packages.yml
   - include: tasks/zshconfig.yml

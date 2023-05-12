@@ -1,10 +1,9 @@
 - name: Install packages
-  apt:
-    name: 
+  ansible.builtin.apt:
+    pkg: 
       - neofetch
       - neovim
       - ranger
       - tmux
       - tmuxinator
-      - xdg-user-dirs
       - zsh

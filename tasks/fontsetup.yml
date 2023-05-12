@@ -1,0 +1,19 @@
+- name: Make sure the fonts directory exists.
+  become: true
+  become_user: testunit
+  ansible.builtin.file:
+    mode: '0755'
+    path: $HOME/.local/share/fonts/NerdFonts
+    state: directory
+
+- name: Download HackNerdFont Regular
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf
+    dest: $HOME/.local/share/fonts/NerdFonts/HackNerdFont-Regular.ttf
+    mode: '0644'
+
+- name: Download HackNerdFont Regular
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf
+    dest: $HOME/.local/share/fonts/NerdFonts/HackNerdFont-Regular.ttf
+    mode: '0644'
