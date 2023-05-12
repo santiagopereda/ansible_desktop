@@ -35,7 +35,13 @@
     dest: $HOME/.config/zsh/.zshrc
     force: yes
 
+- name: Creating a symlink
+  ansible.builtin.file:
+    src: $HOME/.config/zsh/.zshrc
+    dest: $HOME/.zshrc
+    state: link
+
 - name: "load zsh"
-  shell: zsh
+  shell: exec zsh
 
 
