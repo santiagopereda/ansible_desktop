@@ -5,7 +5,7 @@
     mode: '0755'
     path: $HOME/.local/share/fonts/NerdFonts
     state: directory
-
+    
 - name: Download HackNerdFont Regular
   become: true
   become_user: testunit
