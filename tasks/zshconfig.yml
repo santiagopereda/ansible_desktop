@@ -145,7 +145,7 @@
   become: true
   become_user: testunit
   copy:
-    src: files/aliases.zsh
+    src: ../files/aliases.zsh
     dest: $HOME/.config/oh-my-zsh/custom/
     owner: testunit
     group: testunit
@@ -177,7 +177,7 @@
   become: true
   become_user: testunit
   copy:
-    src: files/p10k.zsh
+    src: ../files/p10k.zsh
     dest: $HOME/.config/p10k
     owner: testunit
     group: testunit
