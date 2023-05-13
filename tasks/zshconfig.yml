@@ -86,7 +86,7 @@
   become_user: testunit
   stat:
     path: $HOME/.config/oh-my-zsh/plugins/F-Sy-H
-  register: stat_F-Sy-H_result
+  register: stat_F_Sy_H_result
 
 - name: Cloning F-Sy-H
   become: true
@@ -94,7 +94,7 @@
   git:
     repo=https://github.com/z-shell/F-Sy-H
     dest=$HOME/.config/oh-my-zsh/custom/plugins
-  when: not stat_F-Sy-H_result.stat.exists
+  when: not stat_F_Sy_H_result.stat.exists
 
 - name: "load zsh"
   shell: exec zsh
