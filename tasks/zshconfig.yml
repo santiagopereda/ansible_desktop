@@ -66,20 +66,35 @@
     dest: $HOME/.zshenv
     state: link
 
-- name: Check if .oh-my-zsh exists
+- name: Check if oh-my-zsh exists
   become: true
   become_user: testunit
   stat:
     path: $HOME/.config/oh-my-zsh
   register: stat_oh_my_zsh_result
 
-- name: Cloning  oh-my-zsh
+- name: Cloning oh-my-zsh
   become: true
   become_user: testunit
   git:
     repo=https://github.com/robbyrussell/oh-my-zsh
     dest=$HOME/.config/oh-my-zsh
   when: not stat_oh_my_zsh_result.stat.exists
+
+- name: Check if F-Sy-H exists
+  become: true
+  become_user: testunit
+  stat:
+    path: $HOME/.config/oh-my-zsh/plugins/F-Sy-H
+  register: stat_F-Sy-H_result
+
+- name: Cloning F-Sy-H
+  become: true
+  become_user: testunit
+  git:
+    repo=https://github.com/z-shell/F-Sy-H
+    dest=$HOME/.config/oh-my-zsh/custom/plugins
+  when: not stat_F-Sy-H_result.stat.exists
 
 - name: "load zsh"
   shell: exec zsh
