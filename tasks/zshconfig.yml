@@ -28,7 +28,7 @@
   file:
     path: $HOME/.config/zsh
     state: directory
-  when: p.stat.isdir is not defined and p.stat.isdir == False
+  when: p.stat.isdir is not defined
 
 - name: "Create a default ZSH configuration"
   become: true
