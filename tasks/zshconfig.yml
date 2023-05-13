@@ -93,7 +93,7 @@
   become_user: testunit
   git:
     repo=https://github.com/z-shell/F-Sy-H
-    dest=$HOME/.config/oh-my-zsh/custom/plugins
+    dest=$HOME/.config/oh-my-zsh/custom/plugins/F-Sy-H
   when: not stat_F_Sy_H_result.stat.exists
 
 - name: "load zsh"
