@@ -28,7 +28,7 @@
   file:
     path: $HOME/.config/zsh
     state: directory
-  when: not p.stat.exists
+  when: not stat_zsh_result.stat.exists
 
 - name: "Create a default ZSH configuration"
   become: true
