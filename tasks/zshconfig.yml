@@ -13,11 +13,15 @@
   shell: chsh -s $(which zsh) testunit
 
 - name: Get stats of ZSH directory
+  become: true
+  become_user: testunit
   ansible.builtin.stat:
     path: $HOME/.config/zsh
   register: stat_zsh_result
 
 - name: Print a debug message
+  become: true
+  become_user: testunit
   ansible.builtin.debug:
     msg: "Path exists and is a directory"
   when: stat_zsh_result.stat.exists
@@ -63,11 +67,15 @@
     state: link
 
 - name: Check if .oh-my-zsh exists
+  become: true
+  become_user: testunit
   stat:
     path: $HOME/.config/oh-my-zsh
   register: stat_oh_my_zsh_result
 
 - name: Cloning  oh-my-zsh
+  become: true
+  become_user: testunit
   git:
     repo=https://github.com/robbyrussell/oh-my-zsh
     dest=$HOME/.config/oh-my-zsh
