@@ -126,7 +126,62 @@
     dest=$HOME/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   when: not stat_zsh_syntax_highlighting_result.stat.exists
 
+- name: Check if powerlevel10k exists
+  become: true
+  become_user: testunit
+  stat:
+    path: $HOME/.config/oh-my-zsh/custom/themes/powerlevel10k
+  register: stat_powerlevel10k_result
+
+- name: Cloning powerlevel10k
+  become: true
+  become_user: testunit
+  git:
+    repo=https://github.com/romkatv/powerlevel10k.git
+    dest=$HOME/.config/oh-my-zsh/custom/themes/powerlevel10k
+  when: not stat_powerlevel10k_result.stat.exists
+
+- name: copy aliases.zsh
+  become: true
+  become_user: testunit
+  copy:
+    src: files/aliases.zsh
+    dest: $HOME/.config/oh-my-zsh/custom/
+    owner: testunit
+    group: testunit
+    mode: 0644
+
+- name: Get stats of p10k.zsh directory
+  become: true
+  become_user: testunit
+  ansible.builtin.stat:
+    path: $HOME/.config/p10k.zsh
+  register: stat_p10k_result
+
+- name: Print a debug message
+  become: true
+  become_user: testunit
+  ansible.builtin.debug:
+    msg: "Path exists and is a directory"
+  when: stat_p10k_result.stat.exists
+
+- name: "Create p10k directory in .config"
+  become: true
+  become_user: testunit
+  file:
+    path: $HOME/.config/p10k
+    state: directory
+  when: not stat_p10k_result.stat.exists
+
+- name: copy p10k.zsh
+  become: true
+  become_user: testunit
+  copy:
+    src: files/p10k.zsh
+    dest: $HOME/.config/p10k
+    owner: testunit
+    group: testunit
+    mode: 0644
+
 - name: "load zsh"
   shell: source $HOME/.config/zsh/.zshrc
-
-
