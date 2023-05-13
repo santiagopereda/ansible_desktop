@@ -12,13 +12,24 @@
   become: true
   shell: chsh -s $(which zsh) testunit
 
+- name: Get stats of ZSH directory
+  ansible.builtin.stat:
+    path: $HOME/.config/zsh
+  register: p
+
+- name: Print a debug message
+  ansible.builtin.debug:
+    msg: "Path exists and is a directory"
+  when: p.stat.isdir is defined and p.stat.isdir
+
 - name: "Create ZSH directory in .config"
   become: true
   become_user: testunit
   file:
     path: $HOME/.config/zsh
     state: directory
-    
+  when: p.stat.isdir is not defined and p.stat.isdir == False
+
 - name: "Create a default ZSH configuration"
   become: true
   become_user: testunit
@@ -44,8 +55,6 @@
     force: yes
 
 - name: Creating a symlink
-  become: true
-  become_user: testunit
   ansible.builtin.file:
     src: $HOME/.config/zsh/.zshenv
     dest: $HOME/.zshenv
