@@ -1,6 +1,6 @@
 - name: Get the path to ZSH
-    command: which zsh
-    register: zsh_path
+  local_action: command which zsh
+  register: zsh_path
 
 - name: "Ensure zsh is in allowed shells"
   lineinfile:
@@ -8,8 +8,7 @@
     line: "{{ zsh_path.stdout }}"
 
 - name: "Ensure zsh is default shell"
-  delegate_to: localhost
-    command: basename "${SHELL}"
+    local_action: command basename "${SHELL}"
     register: default_shell
   ansible.builtin.debug:
     msg: "{{ default_shell.stdout }} is the default shell" 
