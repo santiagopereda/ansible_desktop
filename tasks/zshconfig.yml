@@ -32,7 +32,7 @@
     state: directory
   when: not stat_zsh_result.stat.exists
 
-- name: "Create a default ZSH configuration"
+- name: "Create a default ZSH enrionment"
   become: true
   become_user: testunit
   template:
@@ -83,7 +83,7 @@
   become: true
   become_user: testunit
   stat:
-    path: $HOME/.config/oh-my-zsh/plugins/F-Sy-H
+    path: $HOME/.config/oh-my-zsh/custom/plugins/F-Sy-H
   register: stat_F_Sy_H_result
 
 - name: Cloning F-Sy-H
@@ -98,7 +98,7 @@
   become: true
   become_user: testunit
   stat:
-    path: $HOME/.config/oh-my-zsh/plugins/zsh-autosuggestions
+    path: $HOME/.config/oh-my-zsh/custom/plugins/zsh-autosuggestions
   register: stat_zsh_autosuggestions_result
 
 - name: Cloning zsh-autosuggestions
@@ -113,7 +113,7 @@
   become: true
   become_user: testunit
   stat:
-    path: $HOME/.config/oh-my-zsh/plugins/zsh-syntax-highlighting
+    path: $HOME/.config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   register: stat_zsh_syntax_highlighting_result
 
 - name: Cloning zsh-syntax-highlighting
