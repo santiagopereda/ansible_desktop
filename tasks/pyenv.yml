@@ -35,7 +35,22 @@
     dest=$HOME/.config/pyenv/plugins/pyenv-virtualenv
   when: not stat_pyenv_virtualenv_result.stat.exists
 
+- name: Check whether .zshrc exists
+  ansible.builtin.stat:
+    path: $HOME/.config/zsh/.zshrc
+  register: stat_pyenv_zshrc
+
+- name: Check whether pyenv is loaded in .zshrc
+  ansible.builtin.command: >-
+    grep -Fq 'eval "$(pyenv init -)"' $HOME/.config/zsh/.zshrc
+  register: check_zshrc_pyenv
+  ignore_errors: true
+  changed_when: false
+  failed_when: false
+  when: stat_pyenv_zshrc.stat.exists
+
 - name: "Install Python version 3.10.6"
   become: true
   become_user: testunit
-  local_action: command pyenv install 3.10.6
+  ansible.builtin.shell: >- 
+    pyenv install 3.10.6
