@@ -9,9 +9,7 @@
 
 - name: "Ensure zsh is default shell"
   local_action: command basename "${SHELL}"
-  register: default_shell
-  ansible.builtin.debug:
-    msg: "{{ default_shell.stdout }} is the default shell" 
+  register: default_shell 
 
 - name: Set ZSH as the default shell
   become: true
