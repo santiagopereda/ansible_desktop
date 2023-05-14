@@ -32,7 +32,7 @@
     state: directory
   when: not stat_zsh_result.stat.exists
 
-- name: "Create a default ZSH enrionment"
+- name: "Create a default ZSH environment"
   become: true
   become_user: testunit
   template:

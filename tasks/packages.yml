@@ -1,9 +1,17 @@
-- name: Install packages
-  ansible.builtin.apt:
-    pkg: 
-      - neofetch
-      - neovim
-      - ranger
-      - tmux
-      - tmuxinator
-      - zsh
+
+- name: Read the family variables
+  include_vars: "{{ansible_os_family}}.yml"
+
+- name: Make sure the packages are installed (Debian)
+  apt:
+    name: "{{ buildessential_packages }}"
+    state: present
+  register: apt_output
+  changed_when: "('0 newly installed' not in apt_output.stdout|default('') and '0 upgraded' not in apt_output.stdout|default(''))"
+  when: ansible_os_family == "Debian" and ansible_version.major == 1  
+
+- name: Make sure the packages are installed (Debian)
+  apt:
+    name: "{{ buildessential_packages }}"
+    state: present
+  when: ansible_os_family == "Debian" and ansible_version.major == 2

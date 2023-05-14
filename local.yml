@@ -6,7 +6,7 @@
     - name: update repositories
       apt:
         update_cache: true
-        upgrade: yes
+        upgrade: 'yes'
         autoclean: true
         autoremove: true
       changed_when: False
