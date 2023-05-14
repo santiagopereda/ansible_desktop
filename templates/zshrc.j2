@@ -34,9 +34,6 @@ fi
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/p10k.zsh/.p10k.zsh ]] || source ~/.config/p10k.zsh/.p10k.zsh
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -165,3 +162,7 @@ eval "$(pyenv virtualenv-init -)"
 gpip(){
    PIP_REQUIRE_VIRTUALENV="0" python -m pip "$@"
 }
+
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh

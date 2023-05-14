@@ -14,6 +14,7 @@
 - name: Set ZSH as the default shell
   become: true
   shell: chsh -s $(which zsh) testunit
+  when: default_shell.stdout != "zsh"
 
 - name: Get stats of ZSH directory
   become: true
@@ -21,13 +22,6 @@
   ansible.builtin.stat:
     path: $HOME/.config/zsh
   register: stat_zsh_result
-
-- name: Print a debug message
-  become: true
-  become_user: testunit
-  ansible.builtin.debug:
-    msg: "Path exists and is a directory"
-  when: stat_zsh_result.stat.exists
 
 - name: "Create ZSH directory in .config"
   become: true
