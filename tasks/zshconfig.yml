@@ -14,9 +14,6 @@
 - name: Set ZSH as the default shell
   become: true
   shell: chsh -s $(which zsh) testunit
-  ansible.builtin.debug:
-    msg: "{Setting ZSH as the default shell"
-  when: default_shell.stdout != "zsh"
 
 - name: Get stats of ZSH directory
   become: true
