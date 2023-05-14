@@ -1,0 +1,38 @@
+- name: "Determine if Conda is installed"
+  local_action: command conda list"
+  register: conda_installed
+
+- name: Check if pyenv exists
+  become: true
+  become_user: testunit
+  stat:
+    path: $HOME/.config/pyenv
+  register: stat_pyenv_result
+
+- name: Cloning pyenv
+  become: true
+  become_user: testunit
+  git:
+    repo=https://github.com/pyenv/pyenv.git
+    dest=$HOME/.config/pyenv
+  when: not stat_pyenv_result.stat.exists
+
+- name: "Install Python version 3.10.6"
+  become: true
+  become_user: testunit
+  local_action: command pyenv install 3.10.6"
+
+- name: Check if pyenv-virtualenv exists
+  become: true
+  become_user: testunit
+  stat:
+    path: $HOME/.config/pyenv/plugins/pyenv-virtualenv
+  register: stat_pyenv_virtualenv_result
+
+- name: Cloning pyenv
+  become: true
+  become_user: testunit
+  git:
+    repo=https://github.com/pyenv/pyenv-virtualenv.git
+    dest=$HOME/.config/pyenv/plugins/pyenv-virtualenv
+  when: not stat_pyenv_virtualenv_result.stat.exists
