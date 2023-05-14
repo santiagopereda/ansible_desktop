@@ -11,7 +11,7 @@
     path: /etc/shells
     line: "{{ zsh_path.stdout }}"
   when: default_shell.stdout != "zsh"
-  
+
 - name: Set ZSH as the default shell
   become: true
   shell: chsh -s $(which zsh) testunit
@@ -138,6 +138,3 @@
     repo=https://github.com/romkatv/powerlevel10k.git
     dest=$HOME/.config/oh-my-zsh/custom/themes/powerlevel10k
   when: not stat_powerlevel10k_result.stat.exists
-
-- name: "load zsh"
-  shell: source $HOME/.config/zsh/.zshrc
