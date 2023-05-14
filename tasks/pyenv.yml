@@ -1,5 +1,5 @@
 - name: "Determine if Conda is installed"
-  local_action: command conda list"
+  local_action: command conda list
   register: conda_installed
 
 - name: Check if pyenv exists
