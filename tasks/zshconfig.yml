@@ -2,15 +2,16 @@
   local_action: command which zsh
   register: zsh_path
 
+- name: "Determine default shell"
+  local_action: command basename "${SHELL}"
+  register: default_shell 
+
 - name: "Ensure zsh is in allowed shells"
   lineinfile:
     path: /etc/shells
     line: "{{ zsh_path.stdout }}"
-
-- name: "Ensure zsh is default shell"
-  local_action: command basename "${SHELL}"
-  register: default_shell 
-
+  when: default_shell.stdout != "zsh"
+  
 - name: Set ZSH as the default shell
   become: true
   shell: chsh -s $(which zsh) testunit
