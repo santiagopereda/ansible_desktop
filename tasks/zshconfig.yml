@@ -1,5 +1,4 @@
 - name: Get the path to ZSH
-    delegate_to: localhost
     command: which zsh
     register: zsh_path
 
