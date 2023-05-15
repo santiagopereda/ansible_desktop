@@ -3,7 +3,7 @@
   become_user: testunit
   ansible.builtin.file:
     mode: '0755'
-    path: "{{ ansible_env.HOME }}/.local/share/fonts/NerdFonts"
+    path: $HOME/.local/share/fonts/NerdFonts
     state: directory
 
 - name: Download HackNerdFont Regular
