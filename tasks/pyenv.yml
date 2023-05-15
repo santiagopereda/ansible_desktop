@@ -1,3 +1,6 @@
+- name: Read the family variables
+  include_vars: pyenvar.yml
+  
 - name: "Determine if Conda is installed"
   local_action: command conda list
   register: conda_installed
