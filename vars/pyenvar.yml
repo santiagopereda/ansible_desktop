@@ -1,0 +1,24 @@
+# Installation paths
+pyenv_home: "{{ ansible_env.HOME }}/.config"
+pyenv_root: $HOME/.config/pyenv
+
+# Latest Python versions
+pyenv_python310_version: "3.10.6"
+pyenv_python311_version: "3.11.0"
+
+# Python versions to install
+pyenv_python_versions:
+  - "{{ pyenv_python310_version }}"
+
+# Set global pyenv version
+pyenv_global: "{{ pyenv_python310_version }} system"
+
+# Optionally, install virtualenvwrapper plugin for pyenv
+pyenv_virtualenvwrapper: false
+pyenv_virtualenvwrapper_home: "{{ ansible_env.HOME }}/.config/virtualenvs"
+
+# Install using package manager where available
+pyenv_install_from_package_manager: true
+
+# Detect existing install
+pyenv_detect_existing_install: true
