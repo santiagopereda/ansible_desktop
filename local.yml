@@ -12,9 +12,4 @@
       changed_when: False
   
   tasks:
-  - include: tasks/cron.yml
-  - include: tasks/fontsetup.yml
-  - include: tasks/users.yml
-  - include: tasks/packages.yml
-  - include: tasks/zshconfig.yml
-  - include: tasks/pyenv.yml
+  - include: tasks/main.yml

@@ -1,0 +1,20 @@
+---
+- name: Read main variables
+  include_vars: main.yml
+
+- name: Load variables for the target system
+  ansible.builtin.include_vars: "{{ item }}"
+  with_first_found:
+    - "os/{{ ansible_distribution }}/{{ ansible_distribution_release }}.yml"
+    - "os/{{ ansible_distribution }}.yml"
+    - "os/{{ ansible_os_family }}_{{ ansible_architecture }}.yml"
+    - "os/{{ ansible_os_family }}.yml"
+    - "os/default.yml"
+
+tasks:
+  - include: system/cron.yml
+  - include: system/users.yml
+  - include: install/packages.yml
+  - include: install/fontsetup.yml
+  - include: shell/zsh.yml
+  - include: virtualenv/pyenv.yml
