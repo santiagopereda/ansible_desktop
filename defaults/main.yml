@@ -1,7 +1,6 @@
----
 # Installation paths
-pyenv_home: "{{ lookup('env','HOME') }}/.config"
-pyenv_root: "{{ lookup('env','HOME') }}/.config/pyenv"
+pyenv_home: $HOME/.config
+pyenv_root: $HOME/.config/pyenv
 
 # Initialize .bashrc and .zshrc shell scripts
 pyenv_init_shell: true
