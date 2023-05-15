@@ -56,12 +56,12 @@
 - name: "Reload .zshrc"
   become: true
   become_user: testunit
-  ansible.builtin.command: >- 
-    source $HOME/.config/zsh/.zshrc
+  ansible.builtin.shell:
+    cmd: source $HOME/.config/zsh/.zshrc
   register: source_zshrc
 
 - name: "Install python 3.10.6"
   become: true
   become_user: testunit
-  ansible.builtin.command: >- 
-    pyenv install 3.10.6
+  ansible.builtin.shell: 
+    cmd: pyenv install 3.10.6
