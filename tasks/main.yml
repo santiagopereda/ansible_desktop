@@ -1,6 +1,7 @@
 ---
 - name: Read main variables
-  include_vars: main.yml
+  ansible.builtin.include_vars: 
+    file: main.yml
 
 - name: Load variables for the target system
   ansible.builtin.include_vars: "{{ item }}"
