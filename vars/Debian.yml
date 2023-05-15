@@ -29,5 +29,5 @@ buildessential_packages:
 pyenv_install_shell: /bin/zsh
 
 # Installation paths
-pyenv_home: "{{ lookup('env','HOME') }}"/.config
+pyenv_home: "{{ ansible_env.HOME }}/.config"
 pyenv_root: $HOME/.config/pyenv
