@@ -1,7 +1,7 @@
 ---
 - name: Read main variables
   ansible.builtin.include_vars: 
-    dir: vars
+    dir: ../vars
 
 - name: Install build requirements
   include_tasks: install/packages.yml
