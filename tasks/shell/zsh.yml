@@ -21,7 +21,7 @@
   become: true
   become_user: testunit
   ansible.builtin.stat:
-    path: "{{ ansible_env.HOME }}/.config/zsh"
+    path: "{{ home }}/zsh"
   register: stat_zsh_result
 
 - name: "Create ZSH directory in .config"

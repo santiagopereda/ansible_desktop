@@ -1,6 +1,10 @@
 # Installation paths
-pyenv_home: $HOME/.config
-pyenv_root: $HOME/.config/pyenv
+- name: directory_var
+  become: testunit
+  vars:
+    home: $HOME
+    conf_home: $HOME/.config
+    pyenv_root: $HOME/.config/pyenv
 
 # Latest Python versions
 pyenv_python310_version: "3.10.6"
