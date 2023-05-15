@@ -1,5 +1,4 @@
 - name: Make sure the fonts directory exists.
-  become: true
   become_user: testunit
   ansible.builtin.file:
     mode: '0755'

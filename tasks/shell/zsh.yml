@@ -18,17 +18,15 @@
   when: default_shell.stdout != "zsh"
 
 - name: Check if ZSH exists as directory
-  become: true
   become_user: testunit
   ansible.builtin.stat:
-    path: "{{ home }}/zsh"
+    path: $HOME/zsh
   register: stat_zsh_result
 
 - name: "Create ZSH directory in .config"
-  become: true
   become_user: testunit
   file:
-    path: "{{ ansible_env.HOME }}/.config/zsh"
+    path: $HOME/.config/zsh
     state: directory
   when: not stat_zsh_result.stat.exists
 
