@@ -75,7 +75,7 @@
   failed_when: not pyenv_bin_st.stat.exists
   changed_when: false
 
-  - name: Install python versions with Git install
+- name: Install python versions with Git install
   include_tasks: python_versions_with_git.yml
 
 - name: Set global version
