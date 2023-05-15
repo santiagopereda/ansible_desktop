@@ -1,5 +1,7 @@
 ---
 - name: Read main variables
+  become: true
+  become_user: testunit
   ansible.builtin.include_vars: 
     dir: ../vars
 
