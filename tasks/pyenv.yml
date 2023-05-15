@@ -58,6 +58,9 @@
   become_user: testunit
   ansible.builtin.shell:
     cmd: source $HOME/.config/zsh/.zshrc
+  args: 
+    executable: /usr/bin/zsh
+    chdir: $HOME/.config/zsh/
   register: source_zshrc
 
 - name: "Install python 3.10.6"
@@ -65,3 +68,5 @@
   become_user: testunit
   ansible.builtin.shell: 
     cmd: pyenv install 3.10.6
+  args: 
+    executable: /usr/bin/zsh
