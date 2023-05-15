@@ -1,5 +1,5 @@
 - name: Make sure the fonts directory exists.
-  become_user: testunit
+  become_user: "{{base_user}}"
   ansible.builtin.file:
     mode: '0755'
     path: $HOME/.local/share/fonts/NerdFonts
