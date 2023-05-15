@@ -6,40 +6,39 @@
   changed_when: False
 
 - name: Check if pyenv exists
-  become_user: testunit
+  become_user: "{{base_user}}"
   stat:
     path: $HOME/.config/pyenv
   register: stat_pyenv_result
 
 - name: Cloning pyenv
-  become: true
-  become_user: testunit
+  become_user: "{{base_user}}"
   git:
     repo=https://github.com/pyenv/pyenv.git
     dest=$HOME/.config/pyenv
   when: not stat_pyenv_result.stat.exists
 
 - name: Check if pyenv-virtualenv exists
-  become_user: testunit
+  become_user: "{{base_user}}"
   stat:
     path: $HOME/.config/pyenv/plugins/pyenv-virtualenv
   register: stat_pyenv_virtualenv_result
 
 - name: Cloning pyenv
-  become_user: testunit
+  become_user: "{{base_user}}"
   git:
     repo=https://github.com/pyenv/pyenv-virtualenv.git
     dest=$HOME/.config/pyenv/plugins/pyenv-virtualenv
   when: not stat_pyenv_virtualenv_result.stat.exists
 
 - name: Check whether .zshrc exists
-  become_user: testunit
+  become_user: "{{base_user}}"
   ansible.builtin.stat:
     path: $HOME/.config/zsh/.zshrc
   register: stat_pyenv_zshrc
 
 - name: Check whether pyenv is loaded in .zshrc
-  become_user: testunit
+  become_user: "{{base_user}}"
   ansible.builtin.command: >-
     grep -Fq 'eval "$(pyenv init -)"' $HOME/.config/zsh/.zshrc
   register: check_zshrc_pyenv
@@ -48,13 +47,19 @@
   failed_when: false
   when: stat_pyenv_zshrc.stat.exists
 
+- name: Check environment variables
+  ansible.builtin.assert:
+    that:
+      - "pyenv_bin_path is defined"
+    msg: "pyenv binary path not defined"
+    
 - name: Set path to pyenv binary
   ansible.builtin.set_fact:
-    pyenv_bin_path: "{{ pyenv_root }}/bin/pyenv"
+    pyenv_bin_path: $HOME/.config/pyenv/bin/pyenv
   when: pyenv_bin_path is undefined
 
 - name: "Reload .zshrc"
-  become_user: testunit
+  become_user: "{{base_user}}"
   ansible.builtin.shell:
     cmd: source $HOME/.config/zsh/.zshrc
   args: 
@@ -63,7 +68,7 @@
   register: source_zshrc
 
 - name: "Install python 3.10.6"
-  become_user: testunit
+  become_user: "{{base_user}}"
   ansible.builtin.shell: 
     cmd: pyenv install 3.10.6
   args: 
