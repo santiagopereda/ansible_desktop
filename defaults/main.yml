@@ -1,11 +1,7 @@
 ---
-- name: Basic usage
-  ansible.builtin.debug:
-    msg: "'{{ lookup('ansible.builtin.env', 'HOME') }}' is the HOME environment variable."
-
 # Installation paths
-pyenv_home: "{{ ansible_env.HOME }}/.config"
-pyenv_root: "{{ ansible_env.HOME }}/.config/pyenv"
+pyenv_home: "{{ lookup('env','HOME') }}/.config"
+pyenv_root: "{{ lookup('env','HOME') }}/.config/pyenv"
 
 # Initialize .bashrc and .zshrc shell scripts
 pyenv_init_shell: true
