@@ -4,7 +4,7 @@
   ansible.builtin.shell: >-
     {{ pyenv_bin_path }} global
   args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
+    executable: "{{ pyenv_install_shell }}"
   register: pyenv_global_version
   changed_when: false
 
