@@ -10,5 +10,5 @@
   become_user: testunit
   ansible.builtin.get_url:
     url: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf
-    dest: "{{ ansible_env.HOME }}/.local/share/fonts/NerdFonts/HackNerdFont-Regular.ttf"
+    dest: $HOME/.local/share/fonts/NerdFonts/HackNerdFont-Regular.ttf
     mode: '0644'
