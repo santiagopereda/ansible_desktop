@@ -1,5 +1,5 @@
+---
 # file: build-essential/vars/Debian.yml
-
 buildessential_packages:
   - make
   - build-essential
@@ -26,3 +26,5 @@ buildessential_packages:
   - tmux
   - tmuxinator
   - zsh
+
+ pyenv_install_shell: /bin/zsh
