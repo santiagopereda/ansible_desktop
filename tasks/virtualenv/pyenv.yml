@@ -52,15 +52,6 @@
     pyenv_bin_path: $HOME/.config/pyenv/bin/pyenv
   when: pyenv_bin_path is undefined
 
-- name: "Reload .zshrc"
-  become_user: "{{base_user}}"
-  ansible.builtin.shell:
-    cmd: source $HOME/.config/zsh/.zshrc
-  args: 
-    executable: '{{ pyenv_install_shell }}'
-    chdir: $HOME/.config/zsh/
-  register: source_zshrc
-
 - name: Check environment variables
   ansible.builtin.assert:
     that:
