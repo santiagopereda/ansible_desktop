@@ -47,12 +47,6 @@
   failed_when: false
   when: stat_pyenv_zshrc.stat.exists
 
-- name: Check environment variables
-  ansible.builtin.assert:
-    that:
-      - "pyenv_bin_path is defined"
-    msg: "pyenv binary path not defined"
-    
 - name: Set path to pyenv binary
   ansible.builtin.set_fact:
     pyenv_bin_path: $HOME/.config/pyenv/bin/pyenv
@@ -69,7 +63,8 @@
 
 - name: "Install python 3.10.6"
   become_user: "{{base_user}}"
-  ansible.builtin.shell: 
-    cmd: pyenv install 3.10.6
+  ansible.builtin.shell: >-
+    {{ pyenv_bin_path }} install {{ pyenv_python310_version }}
   args: 
-    executable: /usr/bin/zsh
+    executable: "{{pyenv_install_shell}}"
+    creates: "$HOME/.config/pyenv/versions/{{ pyenv_python310_version }}/bin/python"
