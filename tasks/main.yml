@@ -11,10 +11,15 @@
     - "os/{{ ansible_os_family }}.yml"
     - "os/default.yml"
 
-tasks:
-  - include: system/cron.yml
-  - include: system/users.yml
-  - include: install/packages.yml
-  - include: install/fontsetup.yml
-  - include: shell/zsh.yml
-  - include: virtualenv/pyenv.yml
+- name: Install build requirements
+  include_tasks: install/packages.yml
+- name: Install Fonts
+  include_tasks: install/fontsetup.yml
+- name: Create root user
+  include_tasks: system/users.yml
+- name: Setup cron task
+  include_tasks: system/cron.yml
+- name: Install Zsh and components
+  include_tasks: shell/zsh.yml
+- name: Install and setup pyenv
+  include_tasks: virtualenv/pyenv.yml
