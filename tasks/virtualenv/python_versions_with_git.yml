@@ -4,6 +4,7 @@
   ansible.builtin.shell: >-
     {{ pyenv_bin_path }} install {{ item }}
   args:
+    chdir: $HOME/.config/pyenv/versions/
     executable: "{{ pyenv_install_shell }}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
