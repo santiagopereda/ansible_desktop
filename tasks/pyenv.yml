@@ -9,7 +9,7 @@
   become: true
   become_user: testunit
   stat:
-    path: $HOME/.config/pyenv
+    path: "{{ pyenv_root }}"
   register: stat_pyenv_result
 
 - name: Cloning pyenv
@@ -52,6 +52,11 @@
   changed_when: false
   failed_when: false
   when: stat_pyenv_zshrc.stat.exists
+
+- name: Set path to pyenv binary
+  ansible.builtin.set_fact:
+    pyenv_bin_path: "{{ pyenv_root }}/bin/pyenv"
+  when: pyenv_bin_path is undefined
 
 - name: "Reload .zshrc"
   become: true
