@@ -61,12 +61,8 @@
     chdir: $HOME/.config/zsh/
   register: source_zshrc
 
-- name: "Install python 3.10.6"
-  become_user: "{{base_user}}"
-  ansible.builtin.shell: >-
-    {{ pyenv_bin_path }} install {{ item }}
-  args: 
-    executable: "{{ pyenv_install_shell }}"
-    creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
-  with_items: "{{ pyenv_python_versions }}"
-  environment: "{{ pyenv_install_environment }}"
+- name: Check environment variables
+  ansible.builtin.assert:
+    that:
+      - "pyenv_bin_path is defined"
+    msg: "pyenv binary path not defined"
