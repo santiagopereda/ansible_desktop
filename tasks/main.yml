@@ -3,15 +3,17 @@
   ansible.builtin.include_vars: 
     dir: ../vars
 
-- name: Install build requirements
-  include_tasks: install/packages.yml
-- name: Install Fonts
-  include_tasks: install/fontsetup.yml
 - name: Create root user
   include_tasks: system/users.yml
+
 - name: Setup cron task
   include_tasks: system/cron.yml
-- name: Install Zsh and components
-  include_tasks: shell/zsh.yml
-- name: Install and setup pyenv
-  include_tasks: virtualenv/pyenv.yml
+
+- name: Install build requirements
+  include_tasks: install/Linux.yml
+
+- name: Configure shell
+  include_tasks: shell/shell.yml
+  
+- name: Set up Enrvironments
+  include_tasks: versions/global_versions.yml.yml

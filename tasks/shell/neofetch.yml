@@ -1,0 +1,7 @@
+- name: "Create a default neofetch configuration"
+  become: true
+  become_user: "{{base_user}}"
+  template:
+    src: neofetch.j2
+    dest: $HOME/.config/neofetch/config.conf
+    force: yes

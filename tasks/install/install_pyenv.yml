@@ -5,7 +5,7 @@
   check_mode: False
   changed_when: False
 
-- name: Check if pyenv exists
+- name: Check if ~/.config/pyenv already exists
   become: true
   become_user: "{{base_user}}"
   stat:
@@ -27,7 +27,7 @@
     path: $HOME/.config/pyenv/plugins/pyenv-virtualenv
   register: stat_pyenv_virtualenv_result
 
-- name: Cloning pyenv
+- name: Cloning pyenv-virtualenv
   become: true
   become_user: "{{base_user}}"
   git:
@@ -35,23 +35,21 @@
     dest=$HOME/.config/pyenv/plugins/pyenv-virtualenv
   when: not stat_pyenv_virtualenv_result.stat.exists
 
-- name: Check whether .zshrc exists
+- name: Check if pyenv-virtualenvwrapper exists
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.stat:
-    path: $HOME/.config/zsh/.zshrc
-  register: stat_pyenv_zshrc
+  stat:
+    path: $HOME/.config/pyenv/plugins/pyenv-virtualenvwrapper
+  register: stat_pyenv_virtualenvwrapper_result
 
-- name: Check whether pyenv is loaded in .zshrc
+- name: Clone pyenv-virtualenvwrapper
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.command: >-
-    grep -Fq 'eval "$(pyenv init -)"' $HOME/.config/zsh/.zshrc
-  register: check_zshrc_pyenv
-  ignore_errors: true
-  changed_when: false
-  failed_when: false
-  when: stat_pyenv_zshrc.stat.exists
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv-virtualenvwrapper.git
+    dest: $HOME/.config/pyenv/plugins/pyenv-virtualenvwrapper
+    version: "{{ pyenv_virtualenvwrapper_version }}"
+  when: pyenv_virtualenvwrapper|bool
 
 - name: Set path to pyenv binary
   become: true
@@ -59,26 +57,3 @@
   ansible.builtin.set_fact:
     pyenv_bin_path: $HOME/.config/pyenv/bin/pyenv
   when: pyenv_bin_path is undefined
-
-- name: Check environment variables
-  become: true
-  become_user: "{{base_user}}"
-  ansible.builtin.assert:
-    that:
-      - "pyenv_bin_path is defined"
-    msg: "pyenv binary path not defined"
-
-- name: Check that pyenv binary exists
-  become: true
-  become_user: "{{base_user}}"
-  ansible.builtin.stat:
-    path: "{{ pyenv_bin_path }}"
-  register: pyenv_bin_st
-  failed_when: not pyenv_bin_st.stat.exists
-  changed_when: false
-
-- name: Install python versions with Git install
-  include_tasks: python_versions_with_git.yml
-
-- name: Set global version
-  include_tasks: global_versions.yml
