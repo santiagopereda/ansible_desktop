@@ -2,7 +2,7 @@
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.template:
-    src: ".pyenvrc.j2"
+    src: pyenvrc.j2
     dest: $HOME/.config/pyenv/.pyenvrc
     mode: "0644"
 
