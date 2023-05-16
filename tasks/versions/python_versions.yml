@@ -3,10 +3,8 @@
   ansible.builtin.assert:
     that:
       - "pyenv_bin_path is defined"
+      - pyenv_bin_st.stat.islnk
     msg: "pyenv binary path not defined"
-
-- debug:
-    msg: "{{ pyenv_bin_st.stat.exists }}"
 
 - name: Check that pyenv binary exists
   ansible.builtin.stat:
