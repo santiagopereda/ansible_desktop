@@ -4,7 +4,13 @@
   become_user: "{{base_user}}"
   ansible.builtin.shell: >-
     {{ pyenv_bin_path }} install {{ item }}
+  register: shell_output
   args:
     executable: "{{ pyenv_install_shell }}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
+  environment:
+    TARGET_DIR: $HOME/.config/pyenv
+
+- debug: var=shell_output
+  
