@@ -4,7 +4,7 @@
   file:
     path: $HOME/.config/neofetch/
     state: directory
-    mode: '0644'
+    mode: '0755'
 
 - name: "Create a default neofetch configuration"
   become: true
