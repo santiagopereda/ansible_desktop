@@ -5,9 +5,6 @@
       - "pyenv_bin_path is defined"
     msg: "pyenv binary path not defined"
 
-- debug:
-  msg: {{ pyenv_bin_path }}
-
 - name: Check that pyenv binary exists
   ansible.builtin.stat:
     path: "{{ pyenv_bin_path }}"
