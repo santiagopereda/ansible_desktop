@@ -3,14 +3,16 @@
   ansible.builtin.assert:
     that:
       - "pyenv_bin_path is defined"
-      - pyenv_bin_st.stat.islnk
     msg: "pyenv binary path not defined"
+    
+- debug:
+  msg: "{{ pyenv_bin_path }}"
 
 - name: Check that pyenv binary exists
   ansible.builtin.stat:
     path: "{{ pyenv_bin_path }}"
   register: pyenv_bin_st
-  failed_when: not pyenv_bin_st.stat.exists
+  failed_when: not pyenv_bin_st.stat.islnk
   changed_when: false
 
 - name: Install python versions with Git install
