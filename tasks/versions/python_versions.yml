@@ -9,8 +9,10 @@
   ansible.builtin.stat:
     path: "{{ pyenv_bin_path }}"
   register: pyenv_bin_st
-  failed_when: not pyenv_bin_st.stat.islnk
   changed_when: false
+
+- debug:
+  msg: "{{ pyenv_bin_path }} {{ pyenv_bin_st }}"
 
 - name: Install python versions with Git install
   include_tasks: python_versions_with_git.yml
