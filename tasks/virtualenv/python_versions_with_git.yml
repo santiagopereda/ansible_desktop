@@ -6,6 +6,7 @@
     {{ pyenv_bin_path }} install {{ item }}
   register: shell_output
   args:
+    chdir: $HOME/.config/pyenv
     executable: "{{ pyenv_install_shell }}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
