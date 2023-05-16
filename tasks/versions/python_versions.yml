@@ -9,7 +9,7 @@
   ansible.builtin.stat:
     path: "{{ pyenv_bin_path }}"
   register: pyenv_bin_st
-  failed_when: not pyenv_bin_st.stat.exists
+  failed_when: not pyenv_bin_path.stat.exists
   changed_when: false
 
 - name: Install python versions with Git install

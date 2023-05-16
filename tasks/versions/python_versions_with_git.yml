@@ -1,5 +1,7 @@
 ---
 - name: Install Python interpreters # noqa 305
+  become: true
+  become_user: "{{base_user}}"
   ansible.builtin.shell: >-
     {{ pyenv_bin_path }} install {{ item }}
   args:
