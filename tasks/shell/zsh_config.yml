@@ -1,0 +1,31 @@
+- name: "Create a default ZSH environment"
+  become: true
+  become_user: "{{base_user}}"
+  template:
+    src: zshenv.j2
+    dest: $HOME/.config/zsh/.zshenv
+    force: yes
+
+- name: "Create a default ZSH configuration"
+  become: true
+  become_user: "{{base_user}}"
+  template:
+    src: zshrc.j2
+    dest: $HOME/.config/zsh/.zshrc
+    force: yes
+
+- name: "Create a default neofetch configuration"
+  become: true
+  become_user: "{{base_user}}"
+  template:
+    src: neofetch.j2
+    dest: $HOME/.config/neofetch/config.conf
+    force: yes
+
+- name: Creating a symlink
+  become: true
+  become_user: "{{base_user}}"
+  ansible.builtin.file:
+    src: $HOME/.config/zsh/.zshenv
+    dest: $HOME/.zshenv
+    state: link

@@ -32,38 +32,6 @@
     state: directory
   when: not stat_zsh_result.stat.exists
 
-- name: "Create a default ZSH environment"
-  become: true
-  become_user: "{{base_user}}"
-  template:
-    src: zshenv.j2
-    dest: $HOME/.config/zsh/.zshenv
-    force: yes
-
-- name: "Create a default ZSH configuration"
-  become: true
-  become_user: "{{base_user}}"
-  template:
-    src: zshrc.j2
-    dest: $HOME/.config/zsh/.zshrc
-    force: yes
-
-- name: "Create a default neofetch configuration"
-  become: true
-  become_user: "{{base_user}}"
-  template:
-    src: neofetch.j2
-    dest: $HOME/.config/neofetch/config.conf
-    force: yes
-
-- name: Creating a symlink
-  become: true
-  become_user: "{{base_user}}"
-  ansible.builtin.file:
-    src: $HOME/.config/zsh/.zshenv
-    dest: $HOME/.zshenv
-    state: link
-
 - name: Check if oh-my-zsh exists
   become: true
   become_user: "{{base_user}}"
@@ -138,3 +106,6 @@
     repo=https://github.com/romkatv/powerlevel10k.git
     dest=$HOME/.config/oh-my-zsh/custom/themes/powerlevel10k
   when: not stat_powerlevel10k_result.stat.exists
+
+- name: Configure ZSH
+  include_tasks: zsh_config.yml
