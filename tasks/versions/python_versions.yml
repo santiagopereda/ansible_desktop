@@ -16,8 +16,7 @@
 
 - name: Install python versions with Git install
   include_tasks: python_versions_with_git.yml
-  when: (ansible_system == 'Linux' and not pyenv_homebrew_on_linux) or
-    (ansible_os_family == 'Darwin' and not pyenv_install_from_package_manager)
+  when: ansible_system == 'Linux'
 
 - name: Set global version
   include_tasks: global_version.yml
