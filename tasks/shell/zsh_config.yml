@@ -39,6 +39,10 @@
         pyenv_zshrc_path: "$HOME/.config/zsh/.zshrc"
       when: pyenv_zshrc_path is undefined
     
+    - name: Debug pyenv_zshrc_st variable
+      ansible.builtin.debug:
+        var: pyenv_zshrc_path
+
     - name: Check whether .zshrc exists
       ansible.builtin.stat:
         path: "{{ pyenv_zshrc_path }}"
@@ -47,7 +51,7 @@
     - name: Debug pyenv_zshrc_st variable
       ansible.builtin.debug:
         var: pyenv_zshrc_st
-        
+
     - name: Check whether .pyenvrc is loaded in .zshrc
       ansible.builtin.command: >-
         grep -Fq 'source $HOME/.config/pyenv/.pyenvrc' {{ pyenv_zshrc_path }}
