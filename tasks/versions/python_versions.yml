@@ -12,7 +12,7 @@
   changed_when: false
 
 - debug:
-  msg: "{{ pyenv_bin_path }} {{ pyenv_bin_st }}"
+    msg: "{{ pyenv_bin_path }} {{ pyenv_bin_st }}"
 
 - name: Install python versions with Git install
   include_tasks: python_versions_with_git.yml
