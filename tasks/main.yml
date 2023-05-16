@@ -16,4 +16,4 @@
   include_tasks: shell/shell.yml
   
 - name: Set up Enrvironments
-  include_tasks: versions/global_versions.yml
+  include_tasks: versions/python_versions.yml

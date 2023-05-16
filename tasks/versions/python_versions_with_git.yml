@@ -1,17 +1,9 @@
 ---
-- name: Install Python interpreters
-  become: true
-  become_user: "{{base_user}}"
+- name: Install Python interpreters # noqa 305
   ansible.builtin.shell: >-
     {{ pyenv_bin_path }} install {{ item }}
-  register: shell_output
   args:
-    chdir: $HOME/.config/pyenv
-    executable: "{{ pyenv_install_shell }}"
-    creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
+    executable: "{{ pyenv_install_shell | default(omit) }}"
+    creates: "{{ pyenv_root }}/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
-  environment:
-    TARGET_DIR: $HOME/.config/pyenv
-
-- debug: var=shell_output
-  
+  environment: "{{ pyenv_install_environment }}"
