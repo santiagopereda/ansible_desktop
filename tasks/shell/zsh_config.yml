@@ -46,7 +46,7 @@
     
     - name: Check whether .pyenvrc is loaded in .zshrc
       ansible.builtin.command: >-
-        grep -Fq 'source $HOME/.pyenv/.pyenvrc' {{ pyenv_zshrc_path }}
+        grep -Fq 'source $HOME/.config/pyenv/.pyenvrc' {{ pyenv_zshrc_path }}
       register: check_zshrc_pyenvrc
       ignore_errors: true
       changed_when: false
@@ -62,7 +62,7 @@
       ignore_errors: true
       changed_when: false
       failed_when: false
-      when: stat_pyenv_zshrc.stat.exists
+      when: pyenv_zshrc_st.stat.exists
 
     - name: Load pyenv in .zshrc
       ansible.builtin.blockinfile:
