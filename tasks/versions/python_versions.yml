@@ -4,7 +4,7 @@
     that:
       - "pyenv_bin_path is defined"
     msg: "pyenv binary path not defined"
-    
+
 - debug:
   msg: "{{ pyenv_bin_path }}"
 
