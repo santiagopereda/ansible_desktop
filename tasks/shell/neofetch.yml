@@ -10,6 +10,6 @@
   become: true
   become_user: "{{base_user}}"
   template:
-    src: ../../templates/neofetch.j2
+    src: neofetch.j2
     dest: $HOME/.config/neofetch/config.conf
     force: yes

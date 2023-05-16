@@ -73,8 +73,8 @@
       become: true
       become_user: "{{base_user}}"
       ansible.builtin.command: >-
-        grep -Fq 'eval "$(pyenv init -)"' $HOME/.config/zsh/.zshrc
-      register: "check_zshrc_pyenv"
+        grep -Fq 'eval "$(pyenv init -)"' {{ pyenv_zshrc_path }}
+      register: check_zshrc_pyenv
       ignore_errors: true
       changed_when: false
       failed_when: false
