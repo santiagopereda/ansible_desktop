@@ -36,7 +36,7 @@
   block:
     - name: Set path to .zshrc
       ansible.builtin.set_fact:
-        pyenv_zshrc_path: $HOME/.config/zsh/.zshrc
+        pyenv_zshrc_path: "$HOME/.config/zsh/.zshrc"
       when: pyenv_zshrc_path is undefined
     
     - name: Check whether .zshrc exists
@@ -58,7 +58,7 @@
       become_user: "{{base_user}}"
       ansible.builtin.command: >-
         grep -Fq 'eval "$(pyenv init -)"' $HOME/.config/zsh/.zshrc
-      register: check_zshrc_pyenv
+      register: "check_zshrc_pyenv"
       ignore_errors: true
       changed_when: false
       failed_when: false
