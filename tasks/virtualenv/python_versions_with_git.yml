@@ -1,8 +1,7 @@
 ---
 - name: Install Python interpreters
-  become_user: "{{ base_user }}"
+  become: true
+  become_user: "{{base_user}}"
   ansible.builtin.command:
     cmd: " {{ pyenv_bin_path }} install {{ item }} "
-  args:
-    creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"

@@ -6,12 +6,14 @@
   changed_when: False
 
 - name: Check if pyenv exists
+  become: true
   become_user: "{{base_user}}"
   stat:
     path: $HOME/.config/pyenv
   register: stat_pyenv_result
 
 - name: Cloning pyenv
+  become: true
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/pyenv/pyenv.git
@@ -19,12 +21,14 @@
   when: not stat_pyenv_result.stat.exists
 
 - name: Check if pyenv-virtualenv exists
+  become: true
   become_user: "{{base_user}}"
   stat:
     path: $HOME/.config/pyenv/plugins/pyenv-virtualenv
   register: stat_pyenv_virtualenv_result
 
 - name: Cloning pyenv
+  become: true
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/pyenv/pyenv-virtualenv.git
@@ -32,12 +36,14 @@
   when: not stat_pyenv_virtualenv_result.stat.exists
 
 - name: Check whether .zshrc exists
+  become: true
   become_user: "{{base_user}}"
   ansible.builtin.stat:
     path: $HOME/.config/zsh/.zshrc
   register: stat_pyenv_zshrc
 
 - name: Check whether pyenv is loaded in .zshrc
+  become: true
   become_user: "{{base_user}}"
   ansible.builtin.command: >-
     grep -Fq 'eval "$(pyenv init -)"' $HOME/.config/zsh/.zshrc
@@ -48,17 +54,22 @@
   when: stat_pyenv_zshrc.stat.exists
 
 - name: Set path to pyenv binary
+  become: true
+  become_user: "{{base_user}}"
   ansible.builtin.set_fact:
     pyenv_bin_path: $HOME/.config/pyenv/bin/pyenv
   when: pyenv_bin_path is undefined
 
 - name: Check environment variables
+  become: true
+  become_user: "{{base_user}}"
   ansible.builtin.assert:
     that:
       - "pyenv_bin_path is defined"
     msg: "pyenv binary path not defined"
 
 - name: Check that pyenv binary exists
+  become: true
   become_user: "{{base_user}}"
   ansible.builtin.stat:
     path: "{{ pyenv_bin_path }}"
