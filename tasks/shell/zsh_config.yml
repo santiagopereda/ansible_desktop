@@ -38,7 +38,7 @@
       become: true
       become_user: "{{base_user}}"
       ansible.builtin.set_fact:
-        pyenv_zprofile_path: $HOME/.zprofile
+        pyenv_zprofile_path: $HOME/.config/zsh/.zprofile
       when: pyenv_zprofile_path is undefined
 
     - name: Check whether .zprofile exists
@@ -82,6 +82,14 @@
               export PATH="$PYENV_ROOT/bin:$PATH"
               eval "$(pyenv init --path)"
           when: (ansible_system == 'Linux' and not pyenv_homebrew_on_linux)
+
+    - name: Creating a symlink
+      become: true
+      become_user: "{{base_user}}"
+      ansible.builtin.file:
+        src: $HOME/.config/zsh/.zprofile
+        dest: $HOME/.zprofile
+        state: link
 
 - name: Configure .zshrc
   block:
