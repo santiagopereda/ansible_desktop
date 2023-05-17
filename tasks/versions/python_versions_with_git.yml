@@ -3,6 +3,9 @@
   include_vars:
     dir: ../../vars
 
+- debug:
+    var: lookup('env', 'SHELL')
+
 - name: python source
   become: true
   become_user: "{{ base_user }}"
@@ -13,9 +16,6 @@
   environment:
     ansible_env.SHELL: " {{ pyenv_install_shell }} "
   register: pyenv_root_output
-
-- debug:
-    var: pyenv_root_output.stdout_lines
 
 - name: Install Python interpreters
   become: true
