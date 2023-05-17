@@ -30,6 +30,17 @@
   command: "mv $HOME/.pyenv/versions/{{ item }} $HOME/.config/pyenv/versions/{{ item }}"
   with_items: "{{ pyenv_python_versions }}"
 
+- name: Check if .pyenv exists as directory
+  become: true
+  become_user: "{{base_user}}"
+  ansible.builtin.stat:
+    path: $HOME/.pyenv
+  register: stat_home_pyenv_result
+
+- name: Debug stat_home_pyenv_result variable
+  ansible.builtin.debug:
+    var: stat_home_pyenv_result
+
 - name: Remove directory recursively
   become: true
   become_user: "{{base_user}}"
