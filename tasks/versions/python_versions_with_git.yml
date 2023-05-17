@@ -16,7 +16,7 @@
   ansible.builtin.set_fact:
     shell: "{{ lookup('env','SHELL') }}"
   args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
+    executable: "{{ /bin/zsh }}"
 
 - debug:
     msg: '{{ shell }}'
