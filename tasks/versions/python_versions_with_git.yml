@@ -4,15 +4,16 @@
     dir: ../../vars
 
 - name: Set ansible_env.SHELL to zsh
-  shell: echo "Setting SHELL to zsh"
-  environment:
-    SHELL: /bin/zsh
+  set_fact:
+    ansible_env:
+      SHELL: /bin/zsh
+      ansible_shell_type: zsh
 
 - debug:
     var: lookup('env', 'SHELL')
   environment:
     SHELL: /bin/zsh
-    
+
 - name: python source
   become: true
   become_user: "{{ base_user }}"
