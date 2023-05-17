@@ -19,6 +19,8 @@
     shell: "{{ lookup('env','SHELL') }}"
   args:
     executable: /bin/zsh
+  environment:
+    PATH: "/bin/zsh:{{ ansible_env.SHELL }}" 
 
 - debug:
     msg: '{{ shell }}'
