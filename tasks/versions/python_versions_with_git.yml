@@ -47,4 +47,3 @@
   ansible.builtin.file:
     state: absent
     path: "$HOME/.pyenv"
-    recurse: yes
