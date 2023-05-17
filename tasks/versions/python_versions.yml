@@ -10,13 +10,13 @@
     path: "{{ pyenv_bin_path }}"
   register: pyenv_bin_st
 
-  changed_when: false
 - name: Debug pyenv_bin_path
   ansible.builtin.debug:
-    var: pyenv_bin_st
+    var: pyenv_bin_path
 
-- debug:
-    msg: "{{ pyenv_bin_path }} {{ pyenv_bin_st }}"
+- name: Debug pyenv_bin_st
+  ansible.builtin.debug:
+    var: pyenv_bin_st
 
 - name: Install python versions with Git install
   include_tasks: python_versions_with_git.yml
