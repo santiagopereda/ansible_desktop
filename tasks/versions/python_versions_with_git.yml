@@ -16,8 +16,8 @@
   shell: "source {{ pyenv_zshrc_path }}"
   register: pyenv_install_output
 
-  - debug:
-    var: pyenv_install_output.stdout_lines
+- debug:
+  var: pyenv_install_output.stdout_lines
 
 - name: pyenv --version
   become: true
@@ -25,8 +25,8 @@
   shell: "{{ pyenv_bin_path }} --version"
   register: pyenv_version_output
 
-  - debug:
-    var: pyenv_version_output.stdout_lines
+- debug:
+  var: pyenv_version_output.stdout_lines
 
 - name: Install Python interpreters
   become: true
