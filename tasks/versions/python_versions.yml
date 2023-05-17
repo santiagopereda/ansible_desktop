@@ -9,7 +9,11 @@
   ansible.builtin.stat:
     path: "{{ pyenv_bin_path }}"
   register: pyenv_bin_st
+
   changed_when: false
+- name: Debug pyenv_bin_path
+  ansible.builtin.debug:
+    var: pyenv_bin_st
 
 - debug:
     msg: "{{ pyenv_bin_path }} {{ pyenv_bin_st }}"

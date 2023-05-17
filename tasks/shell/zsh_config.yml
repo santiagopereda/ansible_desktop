@@ -47,12 +47,6 @@
       ansible.builtin.stat:
         path: "{{ pyenv_zshrc_path }}"
       register: pyenv_zshrc_st
-    
-    - name: Debug pyenv_zshrc_st variable
-      become: true
-      become_user: "{{base_user}}"
-      ansible.builtin.debug:
-        var: pyenv_zshrc_st
 
     - name: Check whether .pyenvrc is loaded in .zshrc
       become: true
