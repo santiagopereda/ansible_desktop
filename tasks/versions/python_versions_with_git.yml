@@ -13,7 +13,7 @@
 - name: Reload .zshrc and .zprofile
   become: true
   become_user: "{{ base_user }}"
-  shell: "source {{ pyenv_zshrc_path }} && source {{ pyenv_zprofile_path }}"
+  shell: "source {{ pyenv_zprofile_path }}"
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
   register: zshrc_source_output
