@@ -1,7 +1,7 @@
 ---
 - name: Debug variables
   debug:
-    msg: "{{ base_user }} {{ pyenv_bin_path }} {{ item }} {{ pyenv_install_shell }}"
+    msg: "{{ pyenv_python_versions }} {{ item }} "
   with_items: "{{ pyenv_python_versions }}"
 
 - name: Install Python interpreters
