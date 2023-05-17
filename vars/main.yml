@@ -5,7 +5,7 @@ base_user: "testunit"
 pyenv_init_shell: true
 
 # Latest Python versions
-pyenv_python310_version: "3.10.6"
+pyenv_python310_version: 3.10.6
 pyenv_python311_version: "3.11.0"
 
 # Python versions to install
