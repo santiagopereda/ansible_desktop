@@ -1,11 +1,15 @@
 ---
 - name: Check environment variables
+  become: true
+  become_user: "{{base_user}}"
   ansible.builtin.assert:
     that:
       - "pyenv_bin_path is defined"
     msg: "pyenv binary path not defined"
 
 - name: Check that pyenv binary exists
+  become: true
+  become_user: "{{base_user}}"
   ansible.builtin.stat:
     path: $HOME/.config/pyenv/bin/pyenv
   register: pyenv_bin_st
