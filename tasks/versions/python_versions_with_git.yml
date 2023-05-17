@@ -1,8 +1,8 @@
 ---
 - name: Debug variables
   debug:
-    msg: "{{ pyenv_python310_version }} {{ pyenv_python_versions }} {{ item }} "
-  with_items: {{ pyenv_python_versions }}
+    msg: "{{ pyenv_python310_version }} {{ pyenv_python_versions[0] }} {{ item }} "
+  with_items: "{{ pyenv_python_versions }}"
 
 - name: Install Python interpreters
   become: true
