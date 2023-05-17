@@ -9,7 +9,9 @@
   shell: "source {{ pyenv_zshrc_path }}"
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
-
+  environment:
+    PATH: "/bin/zsh:{{ ansible_env.SHELL }}" 
+    
 - name: set SHELL
   become: true
   become_user: "{{ base_user }}"
@@ -34,12 +36,10 @@
 - name: Install Python interpreters
   become: true
   become_user: "{{base_user}}"
-  shell: 
-    cmd: |
-      "exec {{ pyenv_bin_path }}"
-      "{{ pyenv_bin_path }} install {{ item }}"
+  shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
-  environment: "{{ pyenv_install_environment }}"
+  environment:
+    PATH: "/bin/zsh:{{ ansible_env.SHELL }}"
