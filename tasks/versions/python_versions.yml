@@ -17,6 +17,7 @@
 - name: Debug pyenv_bin_st
   ansible.builtin.debug:
     var: pyenv_bin_st
+  when: pyenv_bin_st.stat.islnk is defined and pyenv_bin_st.stat.islnk
 
 - name: Install python versions with Git install
   include_tasks: python_versions_with_git.yml
