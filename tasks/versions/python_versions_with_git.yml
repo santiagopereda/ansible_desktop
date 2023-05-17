@@ -24,3 +24,4 @@
   become: true
   become_user: "{{base_user}}"
   command: "mv $HOME/.pyenv/versions/{{ item }} $HOME/.config/pyenv/versions/{{ item }}"
+  with_items: "{{ pyenv_python_versions }}"
