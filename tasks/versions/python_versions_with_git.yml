@@ -14,6 +14,8 @@
   become: true
   become_user: "{{base_user}}"
   shell: "source {{ pyenv_zshrc_path }}"
+  args:
+    executable: "{{ pyenv_install_shell | default(omit) }}"
   register: pyenv_install_output
 
 - debug:
@@ -23,6 +25,8 @@
   become: true
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} --version"
+  args:
+    executable: "{{ pyenv_install_shell | default(omit) }}"
   register: pyenv_version_output
 
 - debug:
