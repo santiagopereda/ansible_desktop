@@ -10,7 +10,9 @@
 
 - debug:
     var: lookup('env', 'SHELL')
-
+  environment:
+    SHELL: /bin/zsh
+    
 - name: python source
   become: true
   become_user: "{{ base_user }}"
