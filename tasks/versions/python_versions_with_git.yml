@@ -13,4 +13,9 @@
 - name: Install Python interpreters
   become: true
   become_user: "{{base_user}}"
-  shell: "$HOME/.config/pyenv/bin/pyenv install 3.10.6"
+  shell: "{{ pyenv_bin_path }} install {{ item }}"
+  args:
+    executable: "{{ pyenv_install_shell | default(omit) }}"
+    creates: "{{ pyenv_root }}/versions/{{ item }}/bin/python"
+  with_items: "{{ pyenv_python_versions }}"
+  environment: "{{ pyenv_install_environment }}"
