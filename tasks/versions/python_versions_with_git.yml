@@ -3,17 +3,13 @@
   include_vars:
     dir: ../../vars
 
-- name: Debug variables
-  debug:
-    msg: " {{ pyenv_bin_path }} install {{ item }} {{ pyenv_install_shell }} {{ pyenv_python_versions }}"
-  with_items: "{{ pyenv_python_versions }}"
-
 - name: Install Python interpreters
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.shell: " {{ pyenv_bin_path }} install {{ item }} "
+  ansible.builtin.shell: >-
+    {{ pyenv_bin_path }} install {{ item }}
   args:
-    executable: "{{ pyenv_install_shell }}"
-    creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
+    executable: "{{ pyenv_install_shell | default(omit) }}"
+    creates: "{{ pyenv_root }}/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
   environment: "{{ pyenv_install_environment }}"
