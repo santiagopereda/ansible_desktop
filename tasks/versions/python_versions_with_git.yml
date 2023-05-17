@@ -10,8 +10,23 @@
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
 
+- name: set SHELL
+  become: true
+  become_user: "{{ base_user }}"
+  ansible.builtin.set_fact:
+    shell: "{{ lookup('env','SHELL') }}"
+  args:
+    executable: "{{ pyenv_install_shell | default(omit) }}"
+
 - debug:
-    var: lookup('env', 'SHELL')
+    msg: '{{ shell }}'
+
+- name: Print all available facts
+  become: true
+  become_user: "{{ base_user }}"
+  ansible.builtin.debug:
+    var: ansible_facts
+
 
 - name: python source
   become: true
@@ -20,6 +35,8 @@
     cmd: |
       "exec /usr/bin/zsh"
       "{{ pyenv_bin_path }} root"
+  args:
+    executable: "{{ pyenv_install_shell | default(omit) }}"
   environment:
     PATH: "/usr/bin/zsh:{{ ansible_env.SHELL }}" 
   register: pyenv_root_output
