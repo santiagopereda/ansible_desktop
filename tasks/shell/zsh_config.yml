@@ -69,7 +69,7 @@
     - name: Configure .zprofile and create if missing
       when: not pyenv_zprofile_st.stat.exists or check_zprofile.rc != 0
       block:
-        - name: Load pyenv in .zprofile (Git checkout)
+        - name: Load pyenv in .zprofile
           become: true
           become_user: "{{base_user}}"
           ansible.builtin.blockinfile:
@@ -87,7 +87,7 @@
       become: true
       become_user: "{{base_user}}"
       ansible.builtin.file:
-        src: $HOME/.config/zsh/.zprofile
+        src: "{{ pyenv_zprofile_path }}"
         dest: $HOME/.zprofile
         state: link
 
