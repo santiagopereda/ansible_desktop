@@ -1,7 +1,7 @@
 ---
 - name: get vars
   include_vars:
-    file: main.yaml
+    file: ../../vars/main.yaml
 
 - name: Debug variables
   debug:
