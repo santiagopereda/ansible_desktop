@@ -40,10 +40,6 @@
       ansible.builtin.set_fact:
         pyenv_zshrc_path: $HOME/.config/zsh/.zshrc
       when: pyenv_zshrc_path is undefined
-    
-    - name: Debug pyenv_zshrc_st variable
-      ansible.builtin.debug:
-        var: pyenv_zshrc_path
 
     - name: Check whether .zshrc exists
       become: true

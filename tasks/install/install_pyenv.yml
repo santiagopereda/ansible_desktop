@@ -57,3 +57,7 @@
   ansible.builtin.set_fact:
     pyenv_bin_path: $HOME/.config/pyenv/bin/pyenv
   when: pyenv_bin_path is undefined
+
+- name: Debug pyenv_bin_path
+  ansible.builtin.debug:
+    var: pyenv_bin_path
