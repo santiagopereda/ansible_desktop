@@ -10,28 +10,6 @@
     msg: "{{ pyenv_bin_path }} install {{ item }}"
   with_items: "{{ pyenv_python_versions }}"
 
-- name: Source .zshrc
-  become: true
-  become_user: "{{base_user}}"
-  shell: "source {{ pyenv_zshrc_path }}"
-  args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
-  register: pyenv_install_output
-
-- debug:
-    var: pyenv_install_output.stdout_lines
-
-- name: pyenv --version
-  become: true
-  become_user: "{{base_user}}"
-  shell: "{{ pyenv_bin_path }} --version"
-  args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
-  register: pyenv_version_output
-
-- debug:
-    var: pyenv_version_output.stdout_lines
-
 - name: Install Python interpreters
   become: true
   become_user: "{{base_user}}"
