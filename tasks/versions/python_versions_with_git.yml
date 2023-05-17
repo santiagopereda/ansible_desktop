@@ -8,6 +8,19 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
-    executable: /bin/zsh
+    executable: "{{ pyenv_install_shell }}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
+
+- name: Move all shims files
+  become: true
+  become_user: "{{base_user}}"
+  command: mv "{{ item }}" $HOME/.config/pyenv/shims
+  with_fileglob: "$HOME/.pyenv/shims/*"
+  args:
+    warn: false
+  
+- name: Move version to destination
+  become: true
+  become_user: "{{base_user}}"
+  command: "mv $HOME/.pyenv/versions/{{ item }} $HOME/.config/pyenv/versions/{{ item }}"
