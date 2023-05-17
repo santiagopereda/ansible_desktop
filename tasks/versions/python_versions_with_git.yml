@@ -14,6 +14,8 @@
   become: true
   become_user: "{{ base_user }}"
   shell: "source ~/.zshrc && source ~/.zprofile"
+  args:
+    executable: "{{ pyenv_install_shell | default(omit) }}"
   register: zshrc_source_output
 
 - debug:
