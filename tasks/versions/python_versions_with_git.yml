@@ -1,4 +1,6 @@
 ---
+- debug: msg: " {{base_user}} {{ pyenv_bin_path }} {{ item }} {{ pyenv_install_shell }}"
+
 - name: Install Python interpreters
   become: true
   become_user: "{{base_user}}"
