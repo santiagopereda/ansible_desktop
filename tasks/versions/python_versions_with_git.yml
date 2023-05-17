@@ -6,12 +6,10 @@
 - name: source.zshrc
   become: true
   become_user: "{{ base_user }}"
-  shell: 
-    cmd: |
-      "source {{ pyenv_zshrc_path }}"
+  shell: "source {{ pyenv_zshrc_path }}"
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
-    
+
 - debug:
     var: lookup('env', 'SHELL')
 
