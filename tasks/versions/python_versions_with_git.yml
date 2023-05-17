@@ -33,7 +33,7 @@
 - name: Remove directory recursively
   become: true
   become_user: "{{base_user}}"
-  file:
-    path: /path/to/directory
+  ansible.builtin.file:
     state: absent
+    path: "$HOME/.pyenv"
     recurse: yes
