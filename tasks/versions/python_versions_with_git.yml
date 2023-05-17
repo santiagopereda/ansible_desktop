@@ -13,4 +13,4 @@
 - name: Install Python interpreters
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.shell: "$HOME/.config/pyenv/bin/pyenv install 3.10.6"
+  shell: "$HOME/.config/pyenv/bin/pyenv install 3.10.6"
