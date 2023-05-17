@@ -24,10 +24,7 @@
 - name: python source
   become: true
   become_user: "{{ base_user }}"
-  shell: 
-    cmd: |
-      "exec /bin/zsh"
-      "{{ pyenv_bin_path }} root"
+  shell: "exec /bin/zsh"
   args:
     executable: "{{ pyenv_install_shell }}"
   environment:
