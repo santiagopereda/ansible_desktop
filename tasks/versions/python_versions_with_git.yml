@@ -6,7 +6,8 @@
 - debug:
     var: lookup('env', 'SHELL')
   environment:
-
+    PATH: "/usr/bin/zsh:{{ ansible_env.SHELL }}"
+    
 - name: python source
   become: true
   become_user: "{{ base_user }}"
@@ -15,7 +16,7 @@
       "exec /usr/bin/zsh"
       "{{ pyenv_bin_path }} root"
   environment:
-    ansible_env.SHELL: /usr/bin/zsh  
+    PATH: "/usr/bin/zsh:{{ ansible_env.SHELL }}" 
   register: pyenv_root_output
 
 - name: Install Python interpreters
