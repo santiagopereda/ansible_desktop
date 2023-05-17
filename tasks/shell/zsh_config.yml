@@ -35,21 +35,29 @@
 - name: Configure .zprofile
   block:
     - name: Set path to .zprofile
+      become: true
+      become_user: "{{base_user}}"
       ansible.builtin.set_fact:
-        pyenv_zprofile_path: $HOME/.config/.zprofile
+        pyenv_zprofile_path: $HOME/.zprofile
       when: pyenv_zprofile_path is undefined
 
     - name: Check whether .zprofile exists
+      become: true
+      become_user: "{{base_user}}"
       ansible.builtin.stat:
         path: "{{ pyenv_zprofile_path }}"
       register: pyenv_zprofile_st
 
     - name: Resolve .zprofile symlink
+      become: true
+      become_user: "{{base_user}}"
       ansible.builtin.set_fact:
         pyenv_zprofile_path: "{{ pyenv_zprofile_st.stat.lnk_source }}"
       when: pyenv_zprofile_st.stat.exists and pyenv_zprofile_st.stat.islnk
 
     - name: Check whether pyenv is loaded in .zprofile
+      become: true
+      become_user: "{{base_user}}"
       ansible.builtin.command: >-
         grep -Fq 'eval "$(pyenv init --path)"' {{ pyenv_zprofile_path }}
       register: check_zprofile
@@ -62,6 +70,8 @@
       when: not pyenv_zprofile_st.stat.exists or check_zprofile.rc != 0
       block:
         - name: Load pyenv in .zprofile (Git checkout)
+          become: true
+          become_user: "{{base_user}}"
           ansible.builtin.blockinfile:
             dest: "{{ pyenv_zprofile_path }}"
             create: true
