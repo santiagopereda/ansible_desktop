@@ -16,7 +16,7 @@
   ansible.builtin.set_fact:
     shell: "{{ lookup('env','SHELL') }}"
   args:
-    executable: "{{ /bin/zsh }}"
+    executable: /bin/zsh
 
 - debug:
     msg: '{{ shell }}'
