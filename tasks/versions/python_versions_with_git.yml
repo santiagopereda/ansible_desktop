@@ -6,10 +6,9 @@
 - name: python source
   become: true
   become_user: "{{ base_user }}"
-  gather_facts: false
   shell: 
     cmd: |
-      "exec {{ pyenv_bin_path }}"
+      "exec /usr/bin/zsh"
       "{{ pyenv_bin_path }} root"
   environment:
     ansible_env.SHELL: " {{ pyenv_install_shell }} "
