@@ -9,7 +9,9 @@
   shell: 
     cmd: |
       "source {{ pyenv_zshrc_path }}"
-
+  args:
+    executable: "{{ pyenv_install_shell | default(omit) }}"
+    
 - debug:
     var: lookup('env', 'SHELL')
 
