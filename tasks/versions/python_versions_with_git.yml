@@ -21,13 +21,6 @@
 - debug:
     msg: '{{ shell }}'
 
-- name: Print all available facts
-  become: true
-  become_user: "{{ base_user }}"
-  ansible.builtin.debug:
-    var: ansible_facts
-
-
 - name: python source
   become: true
   become_user: "{{ base_user }}"
@@ -36,9 +29,9 @@
       "exec /bin/zsh"
       "{{ pyenv_bin_path }} root"
   args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
+    executable: "{{ pyenv_install_shell }}"
   environment:
-    PATH: "/usr/bin/zsh:{{ ansible_env.SHELL }}" 
+    PATH: "/bin/zsh:{{ ansible_env.SHELL }}" 
   register: pyenv_root_output
 
 - name: Install Python interpreters
