@@ -3,23 +3,6 @@
   include_vars:
     dir: ../../vars
 
-- name: source.zshrc
-  become: true
-  become_user: "{{ base_user }}"
-  shell: "source {{ pyenv_zshrc_path }}"
-  args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
-  environment:
-    PATH: "/bin/zsh:{{ ansible_env.SHELL }}" 
-    
-- name: set SHELL
-  become: true
-  become_user: "{{ base_user }}"
-  ansible.builtin.set_fact:
-    shell: "{{ lookup('env','SHELL') }}"
-  args:
-    executable: /bin/zsh
-
 - name: Install Python interpreters
   become: true
   become_user: "{{base_user}}"
