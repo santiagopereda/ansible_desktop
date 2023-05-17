@@ -3,6 +3,11 @@
   include_vars:
     dir: ../../vars
 
+- name: Set ansible_env.SHELL to zsh
+  set_fact:
+    ansible_env:
+      SHELL: /bin/zsh
+
 - debug:
     var: lookup('env', 'SHELL')
 
