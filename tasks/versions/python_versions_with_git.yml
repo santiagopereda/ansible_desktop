@@ -12,7 +12,7 @@
 - debug:
     var: lookup('env', 'SHELL')
   environment:
-    SHELL: /bin/zsh
+    SHELL: "/bin/zsh:{{ ansible_env.SHELL }}"
 
 - name: python source
   become: true
