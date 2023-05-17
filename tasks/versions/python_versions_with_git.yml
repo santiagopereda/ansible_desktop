@@ -3,16 +3,9 @@
   include_vars:
     dir: ../../vars
 
-- name: Set ansible_env.SHELL to zsh
-  set_fact:
-    ansible_env:
-      SHELL: /bin/zsh
-      ansible_shell_type: zsh
-
 - debug:
     var: lookup('env', 'SHELL')
   environment:
-    SHELL: "/bin/zsh:{{ ansible_env.SHELL }}"
 
 - name: python source
   become: true
@@ -22,7 +15,7 @@
       "exec /usr/bin/zsh"
       "{{ pyenv_bin_path }} root"
   environment:
-    ansible_env.SHELL: " {{ pyenv_install_shell }} "
+    ansible_env.SHELL: " {{ /usr/bin/zsh }} "
   register: pyenv_root_output
 
 - name: Install Python interpreters
