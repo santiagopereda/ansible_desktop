@@ -3,11 +3,16 @@
   include_vars:
     dir: ../../vars
 
+- name: source.zshrc
+  become: true
+  become_user: "{{ base_user }}"
+  shell: 
+    cmd: |
+      "source {{ pyenv_zshrc_path }}"
+
 - debug:
     var: lookup('env', 'SHELL')
-  environment:
-    PATH: "/usr/bin/zsh:{{ ansible_env.SHELL }}"
-    
+
 - name: python source
   become: true
   become_user: "{{ base_user }}"
