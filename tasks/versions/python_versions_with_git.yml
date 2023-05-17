@@ -11,10 +11,8 @@
   with_items: "{{ pyenv_python_versions }}"
 
 - name: Install Python interpreters
+  ansible.builtin.shell:
+    cmd: "{{ pyenv_bin_path }} install {{ item }}"
+  with_items: "{{ pyenv_python_versions }}"
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.shell: |
-    {{ pyenv_bin_path }} install {{ item }}
-  args:
-    executable: "{{ pyenv_install_shell }}"
-  with_items: "{{ pyenv_python_versions }}"
