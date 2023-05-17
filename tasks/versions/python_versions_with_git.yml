@@ -19,21 +19,6 @@
     shell: "{{ lookup('env','SHELL') }}"
   args:
     executable: /bin/zsh
-  environment:
-    PATH: "/bin/zsh:{{ ansible_env.SHELL }}" 
-
-- debug:
-    msg: '{{ shell }}'
-
-- name: python source
-  become: true
-  become_user: "{{ base_user }}"
-  shell: "exec /bin/zsh"
-  args:
-    executable: "{{ pyenv_install_shell }}"
-  environment:
-    PATH: "/bin/zsh:{{ ansible_env.SHELL }}" 
-  register: pyenv_root_output
 
 - name: Install Python interpreters
   become: true
