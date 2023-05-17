@@ -20,7 +20,7 @@
 - name: Move all shims files
   become: true
   become_user: "{{base_user}}"
-  command: mv $HOME/.pyenv/shims/* $HOME/.config/pyenv/shims
+  shell: mv $HOME/.pyenv/shims/* $HOME/.config/pyenv/shims
   args:
     warn: false
   
