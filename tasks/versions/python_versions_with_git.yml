@@ -33,7 +33,7 @@
   become_user: "{{ base_user }}"
   shell: 
     cmd: |
-      "exec /usr/bin/zsh"
+      "exec /bin/zsh"
       "{{ pyenv_bin_path }} root"
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
