@@ -1,12 +1,16 @@
 # Non Root User
 base_user: "testunit"
 
+# Initialize .bashrc and .zshrc shell scripts
+pyenv_init_shell: true
+
 # Latest Python versions
 pyenv_python310_version: "3.10.6"
 pyenv_python311_version: "3.11.0"
 
 # Python versions to install
-pyenv_python_versions: "{{ pyenv_python310_version }}"
+pyenv_python_versions:
+  - "{{ pyenv_python310_version }}"
 
 # Set global pyenv version
 pyenv_global: "{{ pyenv_python310_version }} system"
