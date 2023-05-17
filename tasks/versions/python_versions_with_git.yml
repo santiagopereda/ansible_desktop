@@ -1,8 +1,8 @@
 ---
 - name: get vars
   include_vars:
-    dir: vars
-    
+    dir: ../../vars
+
 - name: Debug variables
   debug:
     msg: "{{ pyenv_python310_version }} {{ pyenv_python_versions }} {{ item }}"
