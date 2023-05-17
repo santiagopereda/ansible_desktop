@@ -10,6 +10,8 @@
     cmd: |
       "exec {{ ansible_env.SHELL }}"
       "{{ pyenv_bin_path }} root"
+      environment:
+  PATH: "{{ pyenv_install_shell }}:{{ ansible_env.SHELL }}"
   register: pyenv_root_output
 
 - debug:
