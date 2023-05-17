@@ -3,28 +3,13 @@
   include_vars:
     dir: ../../vars
 
-- name: Debug variables
-  become: true
-  become_user: "{{base_user}}"
-  debug:
-    msg: "{{ pyenv_bin_path }} install {{ item }}"
-  with_items: "{{ pyenv_python_versions }}"
-
-- name: Reload .zshrc and .zprofile
-  become: true
-  become_user: "{{ base_user }}"
-  shell: "source {{ pyenv_zprofile_path }}"
-  args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
-  register: zshrc_source_output
-
-- debug:
-    var: zshrc_source_output.stdout_lines
-
 - name: python source
   become: true
   become_user: "{{ base_user }}"
-  shell: "{{ pyenv_bin_path }} root"
+  shell: 
+    cmd: |
+      exec "{{ ansible_env.SHELL }}"
+      "{{ pyenv_bin_path }} root"
   register: pyenv_root_output
 
 - debug:
@@ -33,7 +18,10 @@
 - name: Install Python interpreters
   become: true
   become_user: "{{base_user}}"
-  shell: "{{ pyenv_bin_path }} install {{ item }}"
+  shell: 
+    cmd: |
+      exec "{{ ansible_env.SHELL }}"
+      "{{ pyenv_bin_path }} install {{ item }}"
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
