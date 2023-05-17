@@ -7,7 +7,7 @@
   become: true
   become_user: "{{base_user}}"
   debug:
-    msg: " {{ pyenv_bin_path }} install {{ item }} {{ pyenv_install_shell }} {{ pyenv_python_versions }}"
+    msg: "$HOME/.config/pyenv/bin/pyenv install 3.10.6"
   with_items: "{{ pyenv_python_versions }}"
 
 - name: Install Python interpreters
