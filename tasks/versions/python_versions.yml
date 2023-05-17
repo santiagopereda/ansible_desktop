@@ -11,7 +11,7 @@
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.stat:
-    path: $HOME/.config/pyenv/bin/pyenv
+    path: "{{ pyenv_bin_path }}"
   register: pyenv_bin_st
 
 - name: Debug pyenv_bin_path
