@@ -7,15 +7,16 @@
 
 - name: Check that pyenv binary exists
   ansible.builtin.stat:
-    path: "{{ pyenv_bin_path }}"
+    path: $HOME/.config/pyenv/bin/pyenv
   register: pyenv_bin_st
 
 - name: Debug pyenv_bin_path
   ansible.builtin.debug:
     var: pyenv_bin_path
 
-- debug: msg="link exists"
-  when: pyenv_bin_st.stat.islnk is defined and pyenv_bin_st.stat.islnk
+- name: Debug pyenv_bin_st
+  ansible.builtin.debug:
+    var: pyenv_bin_st
 
 - name: Install python versions with Git install
   include_tasks: python_versions_with_git.yml
