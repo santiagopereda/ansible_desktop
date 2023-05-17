@@ -8,7 +8,7 @@
   become_user: "{{ base_user }}"
   shell: 
     cmd: |
-      exec "{{ ansible_env.SHELL }}"
+      "exec {{ ansible_env.SHELL }}"
       "{{ pyenv_bin_path }} root"
   register: pyenv_root_output
 
@@ -20,7 +20,7 @@
   become_user: "{{base_user}}"
   shell: 
     cmd: |
-      exec "{{ ansible_env.SHELL }}"
+      "exec {{ ansible_env.SHELL }}"
       "{{ pyenv_bin_path }} install {{ item }}"
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
