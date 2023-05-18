@@ -23,6 +23,18 @@
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'SHELL') }}"
 
+- name: Install Python interpreters
+  become: true
+  become_user: "{{base_user}}"
+  shell: |
+    case $- in (*i*) echo interactive; esac                                       ─╯
+    case $- in (*l*) echo login; esac
+  args:
+    ansible_shell_executable: "usr/bin/zsh"
+  register: interactive_output
+
+- debug: var=interactive_output
+
 - name: Check if .pyenv exists as directory
   become: true
   become_user: "{{base_user}}"
