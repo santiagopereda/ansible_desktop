@@ -4,7 +4,7 @@
     - name: change user shell to zsh 
       become: yes
       user:
-        name: "{{ the_user }}"
+        name: "{{base_user}}"
         shell: /bin/zsh
 
 - name: Get current global version
