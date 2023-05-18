@@ -1,8 +1,5 @@
 ---
-- hosts: localhost
-  become: no
-  vars:
-    the_user: "{{base_user}}"
+- githosts: localhost
   tasks:
     - name: change user shell to zsh 
       become: yes
