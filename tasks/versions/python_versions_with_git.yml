@@ -8,7 +8,7 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   environment:
-    PYENV_ROOT: "/home/{{base_user}}/.config/pyenv"
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
   args:
     executable: "{{install_shell}}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"

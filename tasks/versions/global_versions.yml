@@ -4,7 +4,7 @@
   become_user: "{{base_user}}"
   shell: " {{ pyenv_bin_path }} global "
   environment:
-    PYENV_ROOT: "/home/{{base_user}}/.config/pyenv"
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
   args:
     executable: "{{ install_shell }}"
   register: pyenv_global_version
@@ -22,7 +22,7 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} versions"
   environment:
-    PYENV_ROOT: "/home/{{base_user}}/.config/pyenv"
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
   register: pyenv_versions
   changed_when: false
   failed_when: false
@@ -33,5 +33,5 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} global 3.10.6 system"
   environment:
-    PYENV_ROOT: "/home/{{base_user}}/.config/pyenv"
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
   when: "pyenv_global is defined and pyenv_global_active != pyenv_global"
