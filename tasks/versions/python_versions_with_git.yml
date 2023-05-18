@@ -21,9 +21,13 @@
     pyenv_versions_active: "{{ pyenv_versions_output.stdout_lines |
       join(' ') | trim() }}"
 
+- name: Debug pyenv_versions_active variable
+  ansible.builtin.debug:
+    var: pyenv_versions_active
+
 - name: Determine if specific versions are active
   ansible.builtin.set_fact:
-    pyenv_other_versions_active: "{{ pyenv_versions_active | regex_search(version_regex_pattern) | length > 0 }}"
+    pyenv_other_versions_active: "{{ pyenv_versions_active | default('') | regex_search(version_regex_pattern) | length > 0 }}"
   vars:
     version_regex_pattern: "{{ pyenv_python_versions | map('regex_escape') | join('|') }}"
 
