@@ -1,13 +1,4 @@
 ---
-- name: change user shell to zsh 
-  user:
-    name: "{{ ansible_user_id }}"
-    shell: /bin/zsh
-
-- name: change user shell to zsh 
-  user:
-    name: "{{base_user}}"
-    shell: /bin/zsh
 
 - name: Get current global version
   become: true
@@ -28,10 +19,7 @@
 - name: Check if 'system' version is available 
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.shell: >-
-    {{ pyenv_bin_path }} versions
-  args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
+  shell: "{{ pyenv_bin_path }} versions"
   register: pyenv_versions
   changed_when: false
   failed_when: false
@@ -47,8 +35,5 @@
   become: true
   become_user: "{{base_user}}"
   shell: >-
-    {{ pyenv_bin_path }} global 3.10.6 system &&
-    {{ pyenv_bin_path }} rehash
-  args:
-    executable: "{{ pyenv_install_shell | default(omit) }}"
+    {{ pyenv_bin_path }} global 3.10.6 system
   when: "pyenv_global is defined and pyenv_global_active != pyenv_global"
