@@ -2,8 +2,7 @@
 - name: Get current global version
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.shell: >-
-    {{ pyenv_bin_path }} global
+  shell: " {{ pyenv_bin_path }} global "
   args:
     executable: "{{ pyenv_install_shell }}"
   register: pyenv_global_version
@@ -38,7 +37,7 @@
 - name: Set pyenv global version to '{{ pyenv_global }}'
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.shell: >-
+  shell: >-
     {{ pyenv_bin_path }} global {{ pyenv_global }} &&
     {{ pyenv_bin_path }} rehash
   args:
