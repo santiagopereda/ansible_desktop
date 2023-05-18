@@ -30,7 +30,7 @@
 - name: Set pyenv global version to '{{ pyenv_global }}'
   become: true
   become_user: "{{base_user}}"
-  shell: >-
+  command: >-
     {{ pyenv_bin_path }} global {{ pyenv_global }} &&
     {{ pyenv_bin_path }} rehash
   args:
