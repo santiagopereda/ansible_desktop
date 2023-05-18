@@ -10,9 +10,9 @@
 - debug: var=username_on_the_host
 
 - name: Basic usage
-  become_user: "{{base_user}}"
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'USER') }}"
+  become_user: "{{base_user}}"
 
 - name: Basic usage
   become_user: "{{base_user}}"
@@ -26,8 +26,8 @@
   register: stat_home_pyenv_result
 
 - name: Install Python interpreters
-  become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
+  become_user: "{{base_user}}"
   args:
     executable: "{{install_shell}}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
