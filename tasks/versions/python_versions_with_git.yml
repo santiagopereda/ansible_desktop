@@ -11,7 +11,6 @@
 
 - name: Basic usage
   become_user: "{{base_user}}"
-  ansible_become_method: enable
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'USER') }}"
 
