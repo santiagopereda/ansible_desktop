@@ -1,7 +1,14 @@
 ---
-- name: Set pyenv global virtualenv '{{ pyenv_global }}'
+- name: 'Create pyenv global virtualenv {{ pyenv_python310_version }} lewagon'
   become: true
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} virtualenv {{ pyenv_python310_version }} lewagon"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
+
+- name: 'Set pyenv global virtualenv {{ pyenv_python310_version }} lewagon'
+  become: true
+  become_user: "{{base_user}}"
+  shell: "{{ pyenv_bin_path }} global lewagon"
+  environment:
+    PYENV_ROOT: "{{ pyenv_install_environment }}"    
