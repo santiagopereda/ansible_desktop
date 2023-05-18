@@ -1,5 +1,6 @@
 # file: build-essential/vars/Debian.yml
 buildessential_packages:
+  - git
   - make
   - build-essential
   - libssl-dev
@@ -20,6 +21,10 @@ buildessential_packages:
   - python3-dev
   - direnv
   - neofetch
+  - imagemagick
+  - jq
+  - unzip
+  - tree
   - neovim
   - ranger
   - tmux

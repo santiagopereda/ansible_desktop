@@ -1,0 +1,8 @@
+---
+- name: Setup global virtual environment
+  include_tasks: global_virtualenv.yml
+  when: install_global_virtualenv | bool
+
+- name: Setup local virtual environment
+  include_tasks: local_virtualenv.yml
+  when: install_local_virtualenv | bool  
