@@ -23,6 +23,12 @@
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'SHELL') }}"
 
+- name: Basic usage
+  become: true
+  become_user: "{{base_user}}"
+  ansible.builtin.debug:
+    msg: "{{ lookup('env', 'PYENV_ROOT') }}"
+
 - name: Check if .pyenv exists as directory
   become: true
   become_user: "{{base_user}}"
@@ -31,10 +37,19 @@
   register: stat_home_pyenv_result
 
 - name: Install Python interpreters
-  become: true
-  become_user: "{{base_user}}"
-  shell: "{{ pyenv_bin_path }} install {{ item }}"
-  args:
-    executable: "{{install_shell}}"
-    creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
-  with_items: "{{ pyenv_python_versions }}"
+  tasks:
+    - name: Set env variables
+      shell: "echo $PYENV_ROOT"
+      environment:
+        PYENV_ROOT: "/home/testunit/.config/pyenv"
+
+    - name: install interpreter
+      become: true
+      become_user: "{{base_user}}"
+      shell: "{{ pyenv_bin_path }} install {{ item }}"
+      environment:
+        PYENV_ROOT: "/home/testunit/.config/pyenv"
+      args:
+        executable: "{{install_shell}}"
+        creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
+      with_items: "{{ pyenv_python_versions }}"
