@@ -10,20 +10,12 @@
   register: pyenv_global_version
   changed_when: false
 
-- name: debug my values
-  debug:
-    msg: "{{pyenv_global_version}}"
-
 - name: Set pyenv_global_active fact
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.set_fact:
     pyenv_global_active: "{{ pyenv_global_version.stdout_lines |
       join(' ') | trim() }}"
-
-- name: debug my values
-  debug:
-    msg: "{{pyenv_global_active}}"
 
 - name: "Check if {{ pyenv_global_venv }} version is available" 
   become: true
@@ -34,11 +26,6 @@
   register: pyenv_versions
   changed_when: false
   failed_when: false
-
-
-- name: debug my values
-  debug:
-    msg: "{{pyenv_versions.stdout}}"
 
 - name: 'Create pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
   become: true
