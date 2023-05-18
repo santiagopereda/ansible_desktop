@@ -35,7 +35,7 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
-    executable: "{{ pyenv_install_shell }}"
-    creates: "{{ pyenv_root }}/versions/{{ item }}/bin/python"
+    executable: "{{ install_shell }}"
+    creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
   when: not stat_home_pyenv_result.stat.exists
