@@ -1,14 +1,55 @@
 ---
-- name: 'Create pyenv global virtualenv {{ pyenv_python310_version }} lewagon'
+- name: Get current global version
   become: true
   become_user: "{{base_user}}"
-  shell: "{{ pyenv_bin_path }} virtualenv {{ pyenv_python310_version }} lewagon"
+  shell: " {{ pyenv_bin_path }} global "
+  environment:
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
+  args:
+    executable: "{{ install_shell }}"
+  register: pyenv_global_version
+  changed_when: false
+
+- name: debug my values
+  debug:
+    msg: pyenv_global_version
+
+- name: Set pyenv_global_active fact
+  become: true
+  become_user: "{{base_user}}"
+  ansible.builtin.set_fact:
+    pyenv_global_active: "{{ pyenv_global_version.stdout_lines |
+      join(' ') | trim() }}"
+
+- name: debug my values
+  debug:
+    msg: pyenv_global_active
+
+- name: "Check if {{ pyenv_global_venv }} version is available" 
+  become: true
+  become_user: "{{base_user}}"
+  shell: "{{ pyenv_bin_path }} versions"
+  environment:
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
+  register: pyenv_versions
+  changed_when: false
+  failed_when: false
+  when: "{{ pyenv_global_venv }} in pyenv_global"
+
+- name: debug my values
+  debug:
+    msg: pyenv_versions
+
+- name: 'Create pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
+  become: true
+  become_user: "{{base_user}}"
+  shell: "{{ pyenv_bin_path }} virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
 
-- name: 'Set pyenv global virtualenv {{ pyenv_python310_version }} lewagon'
+- name: 'Set pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
   become: true
   become_user: "{{base_user}}"
-  shell: "{{ pyenv_bin_path }} global lewagon"
+  shell: "{{ pyenv_bin_path }} global {{ pyenv_global_venv }}"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"    

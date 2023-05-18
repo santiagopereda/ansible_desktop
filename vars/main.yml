@@ -13,6 +13,10 @@ pyenv_python_versions:
   - "{{ pyenv_python310_version }}"
   - "{{ pyenv_python311_version }}"
 
+# Environment versions
+pyenv_global_venv: "lewagon"
+pyenv_lewagon_venv: "testenv"
+
 # Set global pyenv version
 pyenv_global: "{{ pyenv_python310_version }} system"
 
