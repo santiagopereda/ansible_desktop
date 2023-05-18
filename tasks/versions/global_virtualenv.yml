@@ -12,7 +12,7 @@
 
 - name: debug my values
   debug:
-    msg: pyenv_global_version
+    msg: "{{pyenv_global_version}}"
 
 - name: Set pyenv_global_active fact
   become: true
@@ -23,7 +23,7 @@
 
 - name: debug my values
   debug:
-    msg: pyenv_global_active
+    msg: "{{pyenv_global_active}}"
 
 - name: "Check if {{ pyenv_global_venv }} version is available" 
   become: true
@@ -34,11 +34,11 @@
   register: pyenv_versions
   changed_when: false
   failed_when: false
-  when: "'lewagon' in pyenv_global"
+
 
 - name: debug my values
   debug:
-    msg: pyenv_versions
+    msg: "{{pyenv_versions}}"
 
 - name: 'Create pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
   become: true
