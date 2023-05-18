@@ -33,8 +33,11 @@ pyenv_detect_existing_install: true
 # Use Homebrew on Linux
 pyenv_homebrew_on_linux: false
 
-# pyenv home environment
+# pyenv install environment
 pyenv_install_environment: "/home/{{ base_user }}/.config/pyenv"
+
+# pip install environment
+pip_install_environment: "{{ pyenv_install_environment }}/shims/pip"
 
 # Enable install of global virtual environments
 install_global_virtualenv: true
