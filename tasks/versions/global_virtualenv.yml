@@ -34,7 +34,7 @@
   register: pyenv_versions
   changed_when: false
   failed_when: false
-  when: "'lewagon' in pyenv_global"
+
 
 - name: debug my values
   debug:
