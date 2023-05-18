@@ -45,7 +45,7 @@
   become: true
   become_user: "{{base_user}}"
   shell: >-
-    {{ pyenv_bin_path }} global {{ pyenv_global }} &&
+    {{ pyenv_bin_path }} global 3.10.6 system &&
     {{ pyenv_bin_path }} rehash
   args:
     executable: "{{ pyenv_install_shell | default(omit) }}"
