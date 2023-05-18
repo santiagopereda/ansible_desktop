@@ -2,7 +2,7 @@
 - name: Get current global version
   become: true
   become_user: "{{base_user}}"
-  shell: "pip install --upgrade pip"
+  shell: "/home/testunit/.config/pyenv/shims/pip install --upgrade pip"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
   args:
