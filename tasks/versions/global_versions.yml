@@ -1,4 +1,16 @@
 ---
+- name: set up zsh for user
+  hosts: localhost
+  become: no
+  vars:
+    the_user: "{{base_user}}"
+  tasks:
+    - name: change user shell to zsh 
+      become: yes
+      user:
+        name: "{{ the_user }}"
+        shell: /bin/zsh
+
 - name: Get current global version
   become: true
   become_user: "{{base_user}}"

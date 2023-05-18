@@ -59,10 +59,6 @@
     path: $HOME/.pyenv
   register: stat_home_pyenv_result
 
-- name: Debug stat_home_pyenv_result variable
-  ansible.builtin.debug:
-    var: stat_home_pyenv_result
-
 - name: Remove directory recursively
   become: true
   become_user: "{{base_user}}"
