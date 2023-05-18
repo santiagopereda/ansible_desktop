@@ -39,6 +39,9 @@ pyenv_install_environment: "/home/{{ base_user }}/.config/pyenv"
 # pip install environment
 pip_install_environment: "{{ pyenv_install_environment }}/shims/pip"
 
+# jupyter install environment
+jupyter_install_environment: "{{ pyenv_install_environment }}/shims/jupyter"
+
 # Enable install of global virtual environments
 install_global_virtualenv: true
 

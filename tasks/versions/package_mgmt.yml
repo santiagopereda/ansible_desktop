@@ -26,11 +26,11 @@
   become: true
   become_user: "{{base_user}}"
   shell: |
-    jupyter contrib nbextension install --user
-    jupyter nbextension enable toc2/main
-    jupyter nbextension enable collapsible_headings/main
-    jupyter nbextension enable spellchecker/main
-    jupyter nbextension enable code_prettify/code_prettify
+    {{ jupyter_install_environment }} contrib nbextension install --user
+    {{ jupyter_install_environment }} nbextension enable toc2/main
+    {{ jupyter_install_environment }} nbextension enable collapsible_headings/main
+    {{ jupyter_install_environment }} nbextension enable spellchecker/main
+    {{ jupyter_install_environment }} nbextension enable code_prettify/code_prettify
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
   args:
