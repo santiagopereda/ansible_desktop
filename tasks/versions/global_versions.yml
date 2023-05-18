@@ -1,6 +1,7 @@
 ---
 - name: change user shell to zsh 
   user:
+    name: "{{ ansible_user_id }}"
     shell: /bin/zsh
 
 - name: change user shell to zsh 
