@@ -30,7 +30,7 @@
     case $- in (*i*) echo interactive; esac                                       ─╯
     case $- in (*l*) echo login; esac
   args:
-    ansible_shell_executable: "usr/bin/zsh"
+    executable: "usr/bin/zsh"
   register: interactive_output
 
 - debug: var=interactive_output
@@ -47,6 +47,6 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
-    ansible_shell_executable: "usr/bin/zsh"
+    executable: "usr/bin/zsh"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
