@@ -25,17 +25,6 @@
   ansible.builtin.debug:
     var: pyenv_versions_active
 
-- name: Determine if specific versions are active
-  ansible.builtin.set_fact:
-    pyenv_other_versions_active: "{{ pyenv_versions_active | regex_search(version_regex_pattern) is search }}"
-  vars:
-    version_regex_pattern: "{{ item }}"
-  with_items: "{{ pyenv_python_versions }}"
-
-- name: Debug pyenv_versions_active variable
-  ansible.builtin.debug:
-    var: pyenv_other_versions_active
-
 - name: Check if .pyenv exists as directory
   become: true
   become_user: "{{base_user}}"
