@@ -10,5 +10,5 @@
   register: pip_output
 
 - name: Basic Debug
-  - debug:
+  debug:
     msg: "{{pip_output}}"
