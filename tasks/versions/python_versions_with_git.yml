@@ -13,30 +13,21 @@
 
 - name: Basic usage
   become: true
+  become_method: su
   become_user: "{{base_user}}"
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'USER') }}"
 
 - name: Basic usage
   become: true
+  become_method: su
   become_user: "{{base_user}}"
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'SHELL') }}"
 
-- name: Install Python interpreters
-  become: true
-  become_user: "{{base_user}}"
-  shell: |
-    case $- in (*i*) echo interactive; esac                                       ─╯
-    case $- in (*l*) echo login; esac
-  args:
-    executable: "usr/bin/zsh"
-  register: interactive_output
-
-- debug: var=interactive_output
-
 - name: Check if .pyenv exists as directory
   become: true
+  become_method: su
   become_user: "{{base_user}}"
   ansible.builtin.stat:
     path: $HOME/.pyenv
@@ -44,6 +35,7 @@
 
 - name: Install Python interpreters
   become: true
+  become_method: su
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
