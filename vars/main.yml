@@ -11,6 +11,7 @@ pyenv_python311_version: "3.11.0"
 # Python versions to install
 pyenv_python_versions:
   - "{{ pyenv_python310_version }}"
+  - "{{ pyenv_python311_version }}"
 
 # Set global pyenv version
 pyenv_global: "{{ pyenv_python310_version }} system"
@@ -28,4 +29,4 @@ pyenv_detect_existing_install: true
 # Use Homebrew on Linux
 pyenv_homebrew_on_linux: false
 
-pyenv_install_environment: {}
+pyenv_install_environment: "{{ $HOME/.config/pyenv }}"
