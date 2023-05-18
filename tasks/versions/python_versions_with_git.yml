@@ -37,7 +37,7 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   with_items: "{{ pyenv_python_versions }}"
-  when: not stat_home_pyenv_result.stat.exists and not pyenv_other_versions_active
+  when: not stat_home_pyenv_result.stat.exists
 
 - name: Move all shims files
   become: true
