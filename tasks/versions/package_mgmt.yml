@@ -16,6 +16,7 @@
     PYENV_ROOT: "{{ pyenv_install_environment }}"
   args:
     executable: "{{ install_shell }}"
+  register: pip_output
 
 - name: Basic Debug
   debug:
