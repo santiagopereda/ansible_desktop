@@ -18,28 +18,6 @@
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'SHELL') }}"
 
-- name: Get current versions
-  become: true
-  become_user: "{{base_user}}"
-  shell: " {{ pyenv_bin_path }} versions "
-  args:
-    executable: "{{ pyenv_install_shell }}"
-  register: pyenv_versions_output
-  changed_when: false
-  failed_when: false
-  changed_when: false
-
-- name: Set pyenv_versions_active fact
-  become: true
-  become_user: "{{base_user}}"
-  ansible.builtin.set_fact:
-    pyenv_versions_active: "{{ pyenv_versions_output.stdout_lines |
-      join(' ') | trim() }}"
-
-- name: Debug pyenv_versions_active variable
-  ansible.builtin.debug:
-    var: pyenv_versions_active
-
 - name: Check if .pyenv exists as directory
   become: true
   become_user: "{{base_user}}"
@@ -53,30 +31,3 @@
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   with_items: "{{ pyenv_python_versions }}"
   when: not stat_home_pyenv_result.stat.exists
-
-- name: Move all shims files
-  become: true
-  become_user: "{{base_user}}"
-  shell: mv $HOME/.pyenv/shims/* $HOME/.config/pyenv/shims
-  args:
-    warn: false
-  
-- name: Move version to destination
-  become: true
-  become_user: "{{base_user}}"
-  command: "mv $HOME/.pyenv/versions/{{ item }} $HOME/.config/pyenv/versions/{{ item }}"
-  with_items: "{{ pyenv_python_versions }}"
-
-- name: Check if .pyenv exists as directory
-  become: true
-  become_user: "{{base_user}}"
-  ansible.builtin.stat:
-    path: $HOME/.pyenv
-  register: stat_home_pyenv_result
-
-- name: Remove directory recursively
-  become: true
-  become_user: "{{base_user}}"
-  ansible.builtin.file:
-    state: absent
-    path: "$HOME/.pyenv"
