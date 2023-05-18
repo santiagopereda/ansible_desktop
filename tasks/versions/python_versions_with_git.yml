@@ -39,6 +39,6 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
-    executable: "usr/bin/zsh"
+    executable: "/usr/bin/zsh"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
