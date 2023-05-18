@@ -38,7 +38,7 @@
 
 - name: debug my values
   debug:
-    msg: "{{pyenv_versions}}"
+    msg: "{{pyenv_versions.stdout}}"
 
 - name: 'Create pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
   become: true
@@ -46,7 +46,7 @@
   shell: "{{ pyenv_bin_path }} virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
-  when: "'lewagon' not in pyenv_global"
+  when: "'lewagon' not in pyenv_versions.stdout"
 
 - name: 'Set pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
   become: true
