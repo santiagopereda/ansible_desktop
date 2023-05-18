@@ -35,7 +35,6 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
-    executable: "{{ install_shell }}"
+    ansible_shell_executable: "usr/bin/zsh"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
-  when: not stat_home_pyenv_result.stat.exists
