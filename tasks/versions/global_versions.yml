@@ -28,12 +28,6 @@
   failed_when: false
   when: "'system' in pyenv_global"
 
-- name: Basic usage
-  become: true
-  become_user: "{{base_user}}"
-  ansible.builtin.debug:
-    msg: "{{ lookup('env', 'SHELL') }}"
-
 - name: Set pyenv global version to '{{ pyenv_global }}'
   become: true
   become_user: "{{base_user}}"
