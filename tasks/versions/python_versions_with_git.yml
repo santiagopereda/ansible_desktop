@@ -3,7 +3,7 @@
   include_vars:
     dir: ../../vars
 
-- name: Get current global version
+- name: Get current versions
   become: true
   become_user: "{{base_user}}"
   shell: " {{ pyenv_bin_path }} versions "
@@ -14,7 +14,7 @@
   failed_when: false
   changed_when: false
 
-- name: Set pyenv_global_active fact
+- name: Set pyenv_versions_active fact
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.set_fact:
@@ -33,7 +33,7 @@
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   with_items: "{{ pyenv_python_versions }}"
-  when: not stat_home_pyenv_result.stat.exists and " {{ item }} " not in pyenv_versions.stdout
+  when: not stat_home_pyenv_result.stat.exists
 
 - name: Move all shims files
   become: true
