@@ -5,7 +5,7 @@
   become_user: "{{base_user}}"
   shell: " {{ pyenv_bin_path }} global "
   args:
-    executable: "{{ pyenv_install_shell }}"
+    executable: "{{ install_shell }}"
   register: pyenv_global_version
   changed_when: false
 
@@ -34,6 +34,5 @@
 - name: Set pyenv global version to '{{ pyenv_global }}'
   become: true
   become_user: "{{base_user}}"
-  shell: >-
-    {{ pyenv_bin_path }} global 3.10.6 system
+  shell: "{{ pyenv_bin_path }} global 3.10.6 system"
   when: "pyenv_global is defined and pyenv_global_active != pyenv_global"

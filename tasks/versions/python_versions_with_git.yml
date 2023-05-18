@@ -3,6 +3,20 @@
   include_vars:
     dir: ../../vars
 
+- name: get the username running the deploy
+  become: true
+  become_user: "{{base_user}}"
+  local_action: command whoami
+  register: username_on_the_host
+
+- debug: var=username_on_the_host
+
+- name: Basic usage
+  become: true
+  become_user: "{{base_user}}"
+  ansible.builtin.debug:
+    msg: "{{ lookup('env', 'USER') }}"
+
 - name: Basic usage
   become: true
   become_user: "{{base_user}}"
@@ -20,5 +34,8 @@
   become: true
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} install {{ item }}"
+  args:
+    executable: "{{ pyenv_install_shell }}"
+    creates: "{{ pyenv_root }}/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
   when: not stat_home_pyenv_result.stat.exists
