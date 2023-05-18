@@ -34,7 +34,7 @@
   register: pyenv_versions
   changed_when: false
   failed_when: false
-
+  when: "'lewagon' in pyenv_global"
 
 - name: debug my values
   debug:
@@ -46,10 +46,12 @@
   shell: "{{ pyenv_bin_path }} virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
+  when: "'lewagon' not in pyenv_global"
 
 - name: 'Set pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
   become: true
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} global {{ pyenv_global_venv }}"
   environment:
-    PYENV_ROOT: "{{ pyenv_install_environment }}"    
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
+  when: "'lewagon' not in pyenv_global_active"
