@@ -18,8 +18,12 @@
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.set_fact:
-    pyenv_global_active: "{{ pyenv_versions_output.stdout_lines |
+    pyenv_versions_active: "{{ pyenv_versions_output.stdout_lines |
       join(' ') | trim() }}"
+
+- name: Debug pyenv_versions_active variable
+  ansible.builtin.debug:
+    var: pyenv_versions_active
 
 - name: Check if .pyenv exists as directory
   become: true
