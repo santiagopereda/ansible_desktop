@@ -1,9 +1,10 @@
 ---
-
 - name: Get current global version
   become: true
   become_user: "{{base_user}}"
   shell: " {{ pyenv_bin_path }} global "
+  environment:
+    PYENV_ROOT: "/home/{{base_user}}/.config/pyenv"
   args:
     executable: "{{ install_shell }}"
   register: pyenv_global_version
@@ -20,6 +21,8 @@
   become: true
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} versions"
+  environment:
+    PYENV_ROOT: "/home/{{base_user}}/.config/pyenv"
   register: pyenv_versions
   changed_when: false
   failed_when: false
@@ -35,4 +38,6 @@
   become: true
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} global 3.10.6 system"
+  environment:
+    PYENV_ROOT: "/home/{{base_user}}/.config/pyenv"
   when: "pyenv_global is defined and pyenv_global_active != pyenv_global"
