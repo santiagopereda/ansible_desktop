@@ -2,6 +2,21 @@
 - name: get vars
   include_vars:
     dir: ../../vars
+- name: change user shell to zsh 
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+
+- name: change user shell to zsh 
+  user:
+    name: "{{base_user}}"
+    shell: /bin/zsh
+
+- name: Basic usage
+  become: true
+  become_user: "{{base_user}}"
+  ansible.builtin.debug:
+    msg: "{{ lookup('env', 'SHELL') }}"
 
 - name: Get current versions
   become: true

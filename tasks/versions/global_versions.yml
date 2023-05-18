@@ -38,6 +38,8 @@
   when: "'system' in pyenv_global"
 
 - name: Basic usage
+  become: true
+  become_user: "{{base_user}}"
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'SHELL') }}"
 
