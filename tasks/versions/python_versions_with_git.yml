@@ -25,12 +25,11 @@
   ansible.builtin.set_fact:
     pyenv_other_versions_active: "{{ pyenv_versions_active | regex_search(version_regex_pattern) | length > 0 }}"
   vars:
-    version_regex_pattern: "{{ specific_versions_list | map('regex_escape') | join('|') }}"
-
+    version_regex_pattern: "{{ pyenv_python_versions | map('regex_escape') | join('|') }}"
 
 - name: Debug pyenv_versions_active variable
   ansible.builtin.debug:
-    var: pyenv_versions_active
+    var: pyenv_other_versions_active
 
 - name: Check if .pyenv exists as directory
   become: true
