@@ -27,7 +27,6 @@
 
 - name: Install Python interpreters
   become_user: "{{base_user}}"
-  ansible_become_method: enable
   shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
     executable: "{{install_shell}}"
