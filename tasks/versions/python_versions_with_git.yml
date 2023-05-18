@@ -10,24 +10,28 @@
 - debug: var=username_on_the_host
 
 - name: Basic usage
+  become: true
   ansible.builtin.debug:
-    msg: "{{ lookup('env', 'USER') }}"
+    msg: "{{ lookup('env', 'SUDO_USER') }}"
   become_user: "{{base_user}}"
 
 - name: Basic usage
+  become: true
   become_user: "{{base_user}}"
   ansible.builtin.debug:
     msg: "{{ lookup('env', 'SHELL') }}"
 
 - name: Check if .pyenv exists as directory
+  become: true
   become_user: "{{base_user}}"
   ansible.builtin.stat:
     path: $HOME/.pyenv
   register: stat_home_pyenv_result
 
 - name: Install Python interpreters
-  shell: "{{ pyenv_bin_path }} install {{ item }}"
+  become: true
   become_user: "{{base_user}}"
+  shell: "{{ pyenv_bin_path }} install {{ item }}"
   args:
     executable: "{{install_shell}}"
     creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
