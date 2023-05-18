@@ -5,4 +5,3 @@
   shell: "{{ pyenv_bin_path }} virtualenv {{pyenv_global}} lewagon"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
-  when: "pyenv_global is defined and pyenv_global_active != pyenv_global"
