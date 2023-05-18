@@ -16,8 +16,26 @@
     PYENV_ROOT: "{{ pyenv_install_environment }}"
   args:
     executable: "{{ install_shell }}"
-  register: pip_output
 
 - name: Basic Debug
   debug:
-    msg: "{{pip_output.stdout_lines}}"
+    msg: "{{pip_output.stdout_lines}}"  
+
+- name: Install Packages in virtual environment
+  become: true
+  become_user: "{{base_user}}"
+  shell: |
+    jupyter contrib nbextension install --user
+    jupyter nbextension enable toc2/main
+    jupyter nbextension enable collapsible_headings/main
+    jupyter nbextension enable spellchecker/main
+    jupyter nbextension enable code_prettify/code_prettify
+  environment:
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
+  args:
+    executable: "{{ install_shell }}"   
+  register: jupyter_output
+
+- name: Basic Debug
+  debug:
+    msg: "{{jupyter_output.stdout_lines}}"
