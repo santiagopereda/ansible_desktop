@@ -29,7 +29,8 @@
   ansible.builtin.set_fact:
     pyenv_other_versions_active: "{{ pyenv_versions_active | regex_search(version_regex_pattern) | length > 0 }}"
   vars:
-    version_regex_pattern: "(?!(^\\* system \\(set by /home/testunit/.pyenv/version\\)$))({{ pyenv_python_versions | join('|') }})"
+    version_regex_pattern: "(?!(^\\* system \\(set by /home/testunit/.pyenv/version\\)$))({{ item }})"
+  with_items: "{{ pyenv_python_versions }}"
 
 - name: Debug pyenv_versions_active variable
   ansible.builtin.debug:
