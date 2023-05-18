@@ -1,0 +1,14 @@
+---
+- name: Get current global version
+  become: true
+  become_user: "{{base_user}}"
+  shell: "pip install --upgrade pip"
+  environment:
+    PYENV_ROOT: "{{ pyenv_install_environment }}"
+  args:
+    executable: "{{ install_shell }}"
+  register: pip_output
+
+- name: Basic Debug
+  - debug:
+    msg: "{{pip_output}}"

@@ -1,3 +1,4 @@
 ---
 - import_tasks: python_versions.yml
 - import_tasks: virtualenvs.yml
+- import_tasks: package_mgmt.yml
