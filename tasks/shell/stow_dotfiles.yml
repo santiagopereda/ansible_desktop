@@ -56,7 +56,7 @@
 - name: Deploy dotfiles
   become: true
   become_user: "{{ base_user }}"
-  shell: "/usr/bin/stow *"
+  shell: "/usr/bin/stow {{ item.path | basename }}"
   args:
     chdir: "$HOME/dotfiles"
   environment:
