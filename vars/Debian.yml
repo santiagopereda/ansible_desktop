@@ -27,6 +27,7 @@ buildessential_packages:
   - tree
   - neovim
   - ranger
+  - stow
   - tmux
   - tmuxinator
   - zsh
