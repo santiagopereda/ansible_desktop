@@ -25,7 +25,6 @@
     dest: $HOME/dotfiles
     version: "{{ dotfiles_repo_version }}"
     accept_hostkey: "{{ dotfiles_repo_accept_hostkey }}"
-  when: not stat_dotfiles_result.stat.exists
 
 - name: Ensure Stow installed (Ubuntu)
   become: true
