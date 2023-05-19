@@ -18,10 +18,6 @@
     executable: "{{ install_shell }}"
   register: pip_output
 
-- name: Basic Debug
-  debug:
-    msg: "{{pip_output.stdout_lines}}"  
-
 - name: Install Packages in virtual environment
   become: true
   become_user: "{{base_user}}"
@@ -36,7 +32,3 @@
   args:
     executable: "{{ install_shell }}"   
   register: jupyter_output
-
-- name: Basic Debug
-  debug:
-    msg: "{{jupyter_output.stdout_lines}}"
