@@ -48,4 +48,4 @@
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.shell: "stow *"
-    chdir: $HOME/dotfiles
+    chdir: "$HOME/dotfiles"
