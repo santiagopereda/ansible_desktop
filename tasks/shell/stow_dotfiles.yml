@@ -48,11 +48,10 @@
   become: true
   become_user: "{{ base_user }}"
   ansible.builtin.find:
-    paths: ["$HOME/dotfiles"]
+    paths: "$HOME/dotfiles"
     recurse: no
     file_type: directory
   register: files
-  become: false
 
 - name: Deploy dotfiles
   become: true
