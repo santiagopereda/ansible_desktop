@@ -47,6 +47,6 @@
 - name: Deploy dotfiles
   become: true
   become_user: "{{ base_user }}"
-  ansible.builtin.shell: "stow *"
+  ansible.builtin.shell: "/usr/bin/stow *"
   args:
     chdir: "$HOME/dotfiles"
