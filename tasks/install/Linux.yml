@@ -16,9 +16,6 @@
     state: present
   when: ansible_os_family == "Debian" and ansible_version.major == 2
 
-- name: Clone dotfiles
-  include_tasks: dotfiles.yml
-
 - name: Install fonts
   include_tasks: fontsetup.yml
 

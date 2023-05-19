@@ -6,24 +6,6 @@
     dest: $HOME/.config/pyenv/.pyenvrc
     mode: "0644"
 
-- name: "Create .zshrc"
-  become: true
-  become_user: "{{base_user}}"
-  template:
-    src: zshrc.j2
-    dest: $HOME/.config/zsh/.zshrc
-    mode: "0644"
-    force: yes
-
-- name: "Create a default ZSH environment"
-  become: true
-  become_user: "{{base_user}}"
-  template:
-    src: zshenv.j2
-    dest: $HOME/.config/zsh/.zshenv
-    mode: "0644"
-    force: yes
-
 - name: Creating a symlink
   become: true
   become_user: "{{base_user}}"

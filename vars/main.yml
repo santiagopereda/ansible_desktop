@@ -1,6 +1,15 @@
 # Non Root User
 base_user: "testunit"
 
+# Dotfile repository
+dotfiles_repo: "https://github.com/mariuskimmina/.dotfiles.git"
+
+# Dotfile repository version
+dotfiles_repo_version: main
+
+# Allow host keys which are not present or are the same
+dotfiles_repo_accept_hostkey: false
+
 # Initialize .bashrc and .zshrc shell scripts
 pyenv_init_shell: true
 

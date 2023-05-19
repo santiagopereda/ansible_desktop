@@ -106,6 +106,3 @@
     repo=https://github.com/romkatv/powerlevel10k.git
     dest=$HOME/.config/oh-my-zsh/custom/themes/powerlevel10k
   when: not stat_powerlevel10k_result.stat.exists
-
-- name: Configure ZSH
-  include_tasks: zsh_config.yml
