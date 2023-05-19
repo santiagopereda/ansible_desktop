@@ -29,7 +29,7 @@
     accept_hostkey: "{{ dotfiles_repo_accept_hostkey }}"
   when: not stat_dotfiles_result.stat.exists
 
-  - name: Ensure Stow installed (Ubuntu)
+- name: Ensure Stow installed (Ubuntu)
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.apt:
