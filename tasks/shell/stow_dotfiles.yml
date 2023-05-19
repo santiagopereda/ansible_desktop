@@ -7,7 +7,6 @@
     state: present
   when:
     - ansible_os_family == 'RedHat'
-  become: true
 
 - name: Ensure git is installed (Ubuntu)
   become: true
@@ -17,7 +16,6 @@
     state: present
   when:
     - ansible_os_family == 'Debian'
-  become: true
 
 - name: Cloning dotfiles
   become: true
@@ -37,7 +35,6 @@
     state: present
   when:
     - ansible_os_family == 'Debian'
-  become: true
 
 - name: Ensure Stow installed (Fedora)
   become: true
@@ -47,17 +44,10 @@
     state: present
   when:
     - ansible_os_family == 'RedHat'
-  become: true
 
 - name: Deploy dotfiles
   become: true
   become_user: "{{base_user}}"
-  with_items: '{{ files.files }}'
-  vars:
-    user_home: "{{ lookup('env', 'HOME') }}"
-  environment:
-    STOW_DIR: "{{ user_home }}/dotfiles"
-  ansible.builtin.shell: |
-    stow *
-  changed_when: false
-  become: false
+  ansible.builtin.shell: 
+    cmd: stow *
+    chdir: $HOME/dotfiles
