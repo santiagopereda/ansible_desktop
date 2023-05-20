@@ -2,7 +2,7 @@
 base_user: "testunit"
 
 # Dotfile repository
-dotfiles_repo: "https://github.com/mariuskimmina/.dotfiles.git"
+dotfiles_repo: "https://github.com/santiagopereda/dotfiles.git"
 
 # Dotfile repository version
 dotfiles_repo_version: main
