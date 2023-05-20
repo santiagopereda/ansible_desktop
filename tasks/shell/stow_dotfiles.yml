@@ -47,4 +47,4 @@
 - name: Deploy dotfiles
   become: true
   become_user: "{{ base_user }}"
-  shell: "/usr/bin/stow --adopt --dir=$HOME/dotfiles --verbose ."
+  shell: "/usr/bin/stow --adopt --target=$HOME/.config --dir=$HOME/dotfiles --verbose ."
