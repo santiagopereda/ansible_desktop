@@ -10,7 +10,7 @@
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.file:
-    src: $HOME/dotfiles/zsh/.config/zsh/.zshenv
+    src: $HOME/dotfiles/zsh/.zshenv
     dest: $HOME/.zshenv
     state: link
 
