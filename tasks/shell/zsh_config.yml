@@ -10,7 +10,7 @@
   become: true
   become_user: "{{base_user}}"
   ansible.builtin.file:
-    src: $HOME/.config/zsh/.zshenv
+    src: $HOME/dotfiles/zsh/.config/zsh/.zshenv
     dest: $HOME/.zshenv
     state: link
 
@@ -64,14 +64,6 @@
               export PATH="$PYENV_ROOT/bin:$PATH"
               eval "$(pyenv init --path)"
           when: (ansible_system == 'Linux' and not pyenv_homebrew_on_linux)
-
-    - name: Creating a symlink
-      become: true
-      become_user: "{{base_user}}"
-      ansible.builtin.file:
-        src: "{{ pyenv_zprofile_path }}"
-        dest: $HOME/.zprofile
-        state: link
 
 - name: Configure .zshrc
   block:
