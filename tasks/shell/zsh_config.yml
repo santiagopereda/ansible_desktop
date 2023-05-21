@@ -1,7 +1,7 @@
 - name: Create .pyenvrc
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.template:
+  template:
     src: pyenvrc.j2
     dest: $HOME/.config/pyenv/.pyenvrc
     mode: "0644"
@@ -9,7 +9,7 @@
 - name: Creating a symlink
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.file:
+  file:
     src: $HOME/dotfiles/zsh/.zshenv
     dest: $HOME/.zshenv
     state: link
@@ -19,28 +19,28 @@
     - name: Set path to .zprofile
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.set_fact:
+      set_fact:
         pyenv_zprofile_path: $HOME/.config/zsh/.zprofile
       when: pyenv_zprofile_path is undefined
 
     - name: Check whether .zprofile exists
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.stat:
+      stat:
         path: "{{ pyenv_zprofile_path }}"
       register: pyenv_zprofile_st
 
     - name: Resolve .zprofile symlink
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.set_fact:
+      set_fact:
         pyenv_zprofile_path: "{{ pyenv_zprofile_st.stat.lnk_source }}"
       when: pyenv_zprofile_st.stat.exists and pyenv_zprofile_st.stat.islnk
 
     - name: Check whether pyenv is loaded in .zprofile
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.command: >-
+      command: >-
         grep -Fq 'eval "$(pyenv init --path)"' {{ pyenv_zprofile_path }}
       register: check_zprofile
       ignore_errors: true
@@ -54,7 +54,7 @@
         - name: Load pyenv in .zprofile
           become: true
           become_user: "{{base_user}}"
-          ansible.builtin.blockinfile:
+          blockinfile:
             dest: "{{ pyenv_zprofile_path }}"
             create: true
             mode: "0644"
@@ -70,21 +70,21 @@
     - name: Set path to .zshrc
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.set_fact:
+      set_fact:
         pyenv_zshrc_path: $HOME/.config/zsh/.zshrc
       when: pyenv_zshrc_path is undefined
 
     - name: Check whether .zshrc exists
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.stat:
+      stat:
         path: "{{ pyenv_zshrc_path }}"
       register: pyenv_zshrc_st
 
     - name: Check whether .pyenvrc is loaded in .zshrc
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.command: >-
+      command: >-
         grep -Fq 'source $HOME/.config/pyenv/.pyenvrc' {{ pyenv_zshrc_path }}
       register: check_zshrc_pyenvrc
       ignore_errors: true
@@ -95,7 +95,7 @@
     - name: Check whether pyenv is loaded in .zshrc
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.command: >-
+      command: >-
         grep -Fq 'eval "$(pyenv init -)"' {{ pyenv_zshrc_path }}
       register: check_zshrc_pyenv
       ignore_errors: true
@@ -106,7 +106,7 @@
     - name: Load pyenv in .zshrc
       become: true
       become_user: "{{base_user}}"
-      ansible.builtin.blockinfile:
+      blockinfile:
         dest: "{{ pyenv_zshrc_path }}"
         marker: "# {mark} ANSIBLE MANAGED BLOCK: pyenv"
         block: |

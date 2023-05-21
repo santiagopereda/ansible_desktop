@@ -13,7 +13,7 @@
 - name: Set pyenv_global_active fact
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.set_fact:
+  set_fact:
     pyenv_global_active: "{{ pyenv_global_version.stdout_lines |
       join(' ') | trim() }}"
 

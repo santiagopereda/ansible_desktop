@@ -2,7 +2,7 @@
 - name: Check environment variables
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.assert:
+  assert:
     that:
       - "pyenv_bin_path is defined"
     msg: "pyenv binary path not defined"
@@ -10,7 +10,7 @@
 - name: Check that pyenv binary exists
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.stat:
+  stat:
     path: "{{ pyenv_bin_path }}"
   register: pyenv_bin_st
   failed_when: not pyenv_bin_st.stat.exists

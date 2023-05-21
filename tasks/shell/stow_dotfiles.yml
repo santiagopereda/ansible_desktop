@@ -2,7 +2,7 @@
 - name: Ensure git is installed (Fedora)
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.dnf:
+  dnf:
     name: git
     state: present
   when:
@@ -11,7 +11,7 @@
 - name: Ensure git is installed (Ubuntu)
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.apt:
+  apt:
     name: git
     state: present
   when:
@@ -29,7 +29,7 @@
 - name: Ensure Stow installed (Ubuntu)
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.apt:
+  apt:
     name: stow
     state: present
   when:
@@ -38,7 +38,7 @@
 - name: Ensure Stow installed (Fedora)
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.dnf:
+  dnf:
     name: stow
     state: present
   when:
