@@ -9,7 +9,7 @@
     executable: "{{ install_shell }}"
   
 - name: Install specified python requirements in indicated (virtualenv)
-  ansible.builtin.pip:
+  pip:
     requirements: https://raw.githubusercontent.com/lewagon/data-setup/master/specs/releases/linux.txt
     virtualenv: "{{ pyenv_install_environment }}"
 
