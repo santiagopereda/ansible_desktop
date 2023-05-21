@@ -46,7 +46,7 @@
   become_user: "{{base_user}}"
   git:
     repo: https://github.com/pyenv/pyenv-virtualenvwrapper.git
-    dest: "{{ pyenv_install_environment }}"/plugins/pyenv-virtualenvwrapper
+    dest: "{{ pyenv_install_environment }}/plugins/pyenv-virtualenvwrapper"
     version: "{{ pyenv_virtualenvwrapper_version }}"
   when: pyenv_virtualenvwrapper|bool
 
@@ -54,5 +54,5 @@
   become: true
   become_user: "{{base_user}}"
   set_fact:
-    pyenv_bin_path: "{{ pyenv_install_environment }}"/bin/pyenv
+    pyenv_bin_path: "{{ pyenv_install_environment }}/bin/pyenv"
   when: pyenv_bin_path is undefined
