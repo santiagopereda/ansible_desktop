@@ -52,5 +52,5 @@
   become_user: "{{ base_user }}"
   file:
     src: "$HOME/dotfiles/zsh/.zshenv"
-    dest: "$HOME"
+    dest: "$HOME/.zshenv"
     state: link
