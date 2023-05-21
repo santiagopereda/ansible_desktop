@@ -42,6 +42,9 @@ pyenv_detect_existing_install: true
 # Use Homebrew on Linux
 pyenv_homebrew_on_linux: false
 
+# install_environment
+install_environment: "/home/{{ base_user }}/.config"
+
 # pyenv install environment
 pyenv_install_environment: "/home/{{ base_user }}/.config/pyenv"
 
