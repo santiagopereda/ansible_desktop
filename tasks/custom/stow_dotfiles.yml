@@ -46,3 +46,11 @@
   become: true
   become_user: "{{ base_user }}"
   shell: "/usr/bin/stow --target=$HOME/.config --dir=$HOME/dotfiles --verbose ."
+
+- name: Create a symbolic link for zshenv
+  become: true
+  become_user: "{{ base_user }}"
+  file:
+    src: "$HOME/dotfiles/zsh/.zshenv"
+    dest: "$HOME"
+    state: link
