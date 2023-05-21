@@ -9,9 +9,9 @@
     executable: "{{ install_shell }}"
   
 - name: Install specified python requirements in indicated (virtualenv)
-    ansible.builtin.pip:
-      requirements: https://raw.githubusercontent.com/lewagon/data-setup/master/specs/releases/linux.txt
-      virtualenv: "{{ pyenv_install_environment }}"
+  ansible.builtin.pip:
+    requirements: https://raw.githubusercontent.com/lewagon/data-setup/master/specs/releases/linux.txt
+    virtualenv: "{{ pyenv_install_environment }}"
 
 - name: Install Packages in virtual environment
   become: true
