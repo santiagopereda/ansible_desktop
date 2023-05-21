@@ -67,7 +67,6 @@
   git:
     repo=https://github.com/zsh-users/zsh-syntax-highlighting.git
     dest="{{ install_environment }}/oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-  when: not stat_zsh_syntax_highlighting_result.stat.exists
 
 - name: "Cloning powerlevel10k"
   become: true
