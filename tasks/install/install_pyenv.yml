@@ -45,7 +45,7 @@
 - name: Clone pyenv-virtualenvwrapper
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.git:
+  git:
     repo: https://github.com/pyenv/pyenv-virtualenvwrapper.git
     dest: $HOME/.config/pyenv/plugins/pyenv-virtualenvwrapper
     version: "{{ pyenv_virtualenvwrapper_version }}"
@@ -54,6 +54,6 @@
 - name: Set path to pyenv binary
   become: true
   become_user: "{{base_user}}"
-  ansible.builtin.set_fact:
+  set_fact:
     pyenv_bin_path: $HOME/.config/pyenv/bin/pyenv
   when: pyenv_bin_path is undefined
