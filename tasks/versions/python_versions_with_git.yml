@@ -1,8 +1,4 @@
 ---
-- name: get vars
-  include_vars:
-    dir: ../../vars
-
 - name: install interpreter
   become: true
   become_user: "{{base_user}}"
@@ -11,5 +7,5 @@
     PYENV_ROOT: "{{ pyenv_install_environment }}"
   args:
     executable: "{{install_shell}}"
-    creates: "$HOME/.config/pyenv/versions/{{ item }}/bin/python"
+    creates: "{{ pyenv_install_environment }}/versions/{{ item }}/bin/python"
   with_items: "{{ pyenv_python_versions }}"
