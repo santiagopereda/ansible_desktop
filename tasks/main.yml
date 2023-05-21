@@ -1,6 +1,6 @@
 ---
 - name: Read main variables
-  include: 
+  include_vars: 
     dir: ../vars
 
 - name: Create root user
