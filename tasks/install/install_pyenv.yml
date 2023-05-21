@@ -24,7 +24,7 @@
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: "{{ pyenv_install_environment }}"/plugins/pyenv-virtualenv
+    path: "{{ pyenv_install_environment }}/plugins/pyenv-virtualenv"
   register: stat_pyenv_virtualenv_result
 
 - name: Cloning pyenv-virtualenv
@@ -32,13 +32,13 @@
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/pyenv/pyenv-virtualenv.git
-    dest="{{ pyenv_install_environment }}"/plugins/pyenv-virtualenv
+    dest="{{ pyenv_install_environment }}/plugins/pyenv-virtualenv"
 
 - name: Check if pyenv-virtualenvwrapper exists
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: "{{ pyenv_install_environment }}"/plugins/pyenv-virtualenvwrapper
+    path: "{{ pyenv_install_environment }}/plugins/pyenv-virtualenvwrapper"
   register: stat_pyenv_virtualenvwrapper_result
 
 - name: Clone pyenv-virtualenvwrapper
