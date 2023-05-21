@@ -1,0 +1,6 @@
+---
+- name: Create root user
+  include_tasks: system/users.yml
+
+- name: Setup cron task
+  include_tasks: system/cron.yml

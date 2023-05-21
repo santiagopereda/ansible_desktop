@@ -1,5 +1,5 @@
 # Non Root User
-base_user: "testunit"
+base_user: "{{ lookup('env', 'SUDO_USER') }}"
 
 # Dotfile repository
 dotfiles_repo: "https://github.com/santiagopereda/dotfiles.git"
