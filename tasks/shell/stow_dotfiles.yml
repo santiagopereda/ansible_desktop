@@ -24,6 +24,7 @@
     repo: "{{ dotfiles_repo }}"
     dest: $HOME/dotfiles
     version: "{{ dotfiles_repo_version }}"
+    force: true
     accept_hostkey: "{{ dotfiles_repo_accept_hostkey }}"
 
 - name: Ensure Stow installed (Ubuntu)
