@@ -17,10 +17,10 @@
   when: ansible_os_family == "Debian" and ansible_version.major == 2
 
 - name: Install fonts
-  include_tasks: fontsetup.yml
+  include_tasks: install_fonts.yml
 
 - name: Install pyenv
   include_tasks: install_pyenv.yml
 
-- name: Install zsh
-  include_tasks: install_pyenv.yml
+- name: Install oh_my_zsh
+  include_tasks: install_oh_my_zsh.yml
