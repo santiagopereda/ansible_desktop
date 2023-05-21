@@ -1,6 +1,6 @@
 ---
 - name: Read main variables
-  ansible.builtin.include_vars: 
+  include: 
     dir: ../vars
 
 - name: Create root user
