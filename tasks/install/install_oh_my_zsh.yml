@@ -59,7 +59,7 @@
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: "{{ install_environment }}/oh-my-zsh"/custom/plugins/F-Sy-H
+    path: "{{ install_environment }}/oh-my-zsh/custom/plugins/F-Sy-H"
   register: stat_F_Sy_H_result
 
 - name: "Cloning F-Sy-H"
@@ -67,14 +67,14 @@
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/z-shell/F-Sy-H
-    dest="{{ install_environment }}/oh-my-zsh"/custom/plugins/F-Sy-H
+    dest="{{ install_environment }}/oh-my-zsh/custom/plugins/F-Sy-H"
   when: not stat_F_Sy_H_result.stat.exists
 
 - name: "Check if zsh-autosuggestions exists"
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: "{{ install_environment }}/oh-my-zsh"/custom/plugins/zsh-autosuggestions
+    path: "{{ install_environment }}/oh-my-zsh/custom/plugins/zsh-autosuggestions"
   register: stat_zsh_autosuggestions_result
 
 - name: "Cloning zsh-autosuggestions"
@@ -82,14 +82,14 @@
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/zsh-users/zsh-autosuggestions
-    dest="{{ install_environment }}/oh-my-zsh"/custom/plugins/zsh-autosuggestions
+    dest="{{ install_environment }}/oh-my-zsh/custom/plugins/zsh-autosuggestions"
   when: not stat_zsh_autosuggestions_result.stat.exists
 
 - name: "Check if zsh-syntax-highlighting exists"
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: "{{ install_environment }}/oh-my-zsh"/custom/plugins/zsh-syntax-highlighting
+    path: "{{ install_environment }}/oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
   register: stat_zsh_syntax_highlighting_result
 
 - name: "Cloning zsh-syntax-highlighting"
@@ -97,14 +97,14 @@
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest="{{ install_environment }}/oh-my-zsh"/custom/plugins/zsh-syntax-highlighting
+    dest="{{ install_environment }}/oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
   when: not stat_zsh_syntax_highlighting_result.stat.exists
 
 - name: "Check if powerlevel10k exists"
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: "{{ install_environment }}/oh-my-zsh"/custom/themes/powerlevel10k
+    path: "{{ install_environment }}/oh-my-zsh/custom/themes/powerlevel10k"
   register: stat_powerlevel10k_result
 
 - name: "Cloning powerlevel10k"
@@ -112,5 +112,5 @@
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/romkatv/powerlevel10k.git
-    dest="{{ install_environment }}/oh-my-zsh"/custom/themes/powerlevel10k
+    dest="{{ install_environment }}/oh-my-zsh/custom/themes/powerlevel10k"
   when: not stat_powerlevel10k_result.stat.exists
