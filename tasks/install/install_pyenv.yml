@@ -1,3 +1,4 @@
+---
 - name: "Determine if Conda is installed"
   local_action: command conda list
   register: conda_installed
@@ -9,7 +10,7 @@
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: $HOME/.config/pyenv
+    path: "{{ pyenv_install_environment }}"
   register: stat_pyenv_result
 
 - name: Cloning pyenv
@@ -17,14 +18,13 @@
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/pyenv/pyenv.git
-    dest=$HOME/.config/pyenv
-  when: not stat_pyenv_result.stat.exists
+    dest="{{ pyenv_install_environment }}"
 
 - name: Check if pyenv-virtualenv exists
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: $HOME/.config/pyenv/plugins/pyenv-virtualenv
+    path: "{{ pyenv_install_environment }}"/plugins/pyenv-virtualenv
   register: stat_pyenv_virtualenv_result
 
 - name: Cloning pyenv-virtualenv
@@ -32,14 +32,13 @@
   become_user: "{{base_user}}"
   git:
     repo=https://github.com/pyenv/pyenv-virtualenv.git
-    dest=$HOME/.config/pyenv/plugins/pyenv-virtualenv
-  when: not stat_pyenv_virtualenv_result.stat.exists
+    dest="{{ pyenv_install_environment }}"/plugins/pyenv-virtualenv
 
 - name: Check if pyenv-virtualenvwrapper exists
   become: true
   become_user: "{{base_user}}"
   stat:
-    path: $HOME/.config/pyenv/plugins/pyenv-virtualenvwrapper
+    path: "{{ pyenv_install_environment }}"/plugins/pyenv-virtualenvwrapper
   register: stat_pyenv_virtualenvwrapper_result
 
 - name: Clone pyenv-virtualenvwrapper
@@ -47,7 +46,7 @@
   become_user: "{{base_user}}"
   git:
     repo: https://github.com/pyenv/pyenv-virtualenvwrapper.git
-    dest: $HOME/.config/pyenv/plugins/pyenv-virtualenvwrapper
+    dest: "{{ pyenv_install_environment }}"/plugins/pyenv-virtualenvwrapper
     version: "{{ pyenv_virtualenvwrapper_version }}"
   when: pyenv_virtualenvwrapper|bool
 
@@ -55,5 +54,5 @@
   become: true
   become_user: "{{base_user}}"
   set_fact:
-    pyenv_bin_path: $HOME/.config/pyenv/bin/pyenv
+    pyenv_bin_path: "{{ pyenv_install_environment }}"/bin/pyenv
   when: pyenv_bin_path is undefined

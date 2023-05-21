@@ -1,8 +1,8 @@
-
-- name: Read the family variables
+---
+- name: Read the OS family variables
   include_vars: "{{ansible_os_family}}.yml"
 
-- name: Make sure the packages are installed (Debian)
+- name: Make sure packages are installed (Debian)
   apt:
     name: "{{ buildessential_packages }}"
     state: present
@@ -10,7 +10,7 @@
   changed_when: "('0 newly installed' not in apt_output.stdout|default('') and '0 upgraded' not in apt_output.stdout|default(''))"
   when: ansible_os_family == "Debian" and ansible_version.major == 1  
 
-- name: Make sure the packages are installed (Debian)
+- name: Make sure packages are installed (Debian)
   apt:
     name: "{{ buildessential_packages }}"
     state: present
@@ -20,4 +20,7 @@
   include_tasks: fontsetup.yml
 
 - name: Install pyenv
+  include_tasks: install_pyenv.yml
+
+- name: Install zsh
   include_tasks: install_pyenv.yml
