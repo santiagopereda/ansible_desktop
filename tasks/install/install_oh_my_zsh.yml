@@ -60,7 +60,6 @@
   git:
     repo=https://github.com/zsh-users/zsh-autosuggestions
     dest="{{ install_environment }}/oh-my-zsh/custom/plugins/zsh-autosuggestions"
-  when: not stat_zsh_autosuggestions_result.stat.exists
 
 - name: "Cloning zsh-syntax-highlighting"
   become: true
@@ -76,4 +75,3 @@
   git:
     repo=https://github.com/romkatv/powerlevel10k.git
     dest="{{ install_environment }}/oh-my-zsh/custom/themes/powerlevel10k"
-  when: not stat_powerlevel10k_result.stat.exists
