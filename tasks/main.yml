@@ -10,7 +10,7 @@
   include_tasks: install/Linux.yml
 
 - name: Configure shell
-  include_tasks: shell/shell.yml
+  include_tasks: custom/main.yml
   
 - name: Set up Enrvironments
   include_tasks: versions/main.yml

@@ -1,5 +1,0 @@
----
-- import_tasks: zsh.yml
-- import_tasks: stow_dotfiles.yml
-- include_tasks: zsh_config.yml
-- import_tasks: neofetch.yml
