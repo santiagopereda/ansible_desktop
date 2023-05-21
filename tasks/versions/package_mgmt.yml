@@ -8,15 +8,10 @@
   args:
     executable: "{{ install_shell }}"
   
-- name: Install Packages in virtual environment
-  become: true
-  become_user: "{{base_user}}"
-  shell: "{{ pip_install_environment }} install -r https://raw.githubusercontent.com/lewagon/data-setup/master/specs/releases/linux.txt"
-  environment:
-    PYENV_ROOT: "{{ pyenv_install_environment }}"
-  args:
-    executable: "{{ install_shell }}"
-  register: pip_output
+- name: Install specified python requirements in indicated (virtualenv)
+    ansible.builtin.pip:
+      requirements: https://raw.githubusercontent.com/lewagon/data-setup/master/specs/releases/linux.txt
+      virtualenv: "{{ pyenv_install_environment }}"
 
 - name: Install Packages in virtual environment
   become: true

@@ -27,15 +27,15 @@
   changed_when: false
   failed_when: false
 
-- name: 'Create pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
+- name: 'Create pyenv global virtualenv {{ global_python_version }} {{ pyenv_global_venv }}'
   become: true
   become_user: "{{base_user}}"
-  shell: "{{ pyenv_bin_path }} virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}"
+  shell: "{{ pyenv_bin_path }} virtualenv {{ global_python_version }} {{ pyenv_global_venv }}"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
   when: "'lewagon' not in pyenv_versions.stdout"
 
-- name: 'Set pyenv global virtualenv {{ pyenv_python310_version }} {{ pyenv_global_venv }}'
+- name: 'Set pyenv global virtualenv {{ global_python_version }} {{ pyenv_global_venv }}'
   become: true
   become_user: "{{base_user}}"
   shell: "{{ pyenv_bin_path }} global {{ pyenv_global_venv }}"

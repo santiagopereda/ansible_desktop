@@ -31,7 +31,7 @@
 - name: Set pyenv global version to '{{ pyenv_global }}'
   become: true
   become_user: "{{base_user}}"
-  shell: "{{ pyenv_bin_path }} global 3.10.6 system"
+  shell: "{{ pyenv_bin_path }} global {{ global_python_version }} system"
   environment:
     PYENV_ROOT: "{{ pyenv_install_environment }}"
   when: "pyenv_global is defined and pyenv_global_active != pyenv_global"
