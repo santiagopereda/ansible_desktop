@@ -1,10 +1,10 @@
 # **Ansible Development Environment Setup**
-----
 
-This Ansible role is used to pull a remote copy of an Ansible playbook on a managed node that installs the packages, features, and configuration files required for my development environment from a source repository. This setup inverts the default push architecture of Ansible into a pull architecture, which offers near-limitless scaling potential.
+
+This Ansible role is used to pull a remote copy of an Ansible playbook that installs the packages, features, and configuration files required for my development environment from a source repository.
 
 ### **Features**
----
+
 This Ansible playbook performs the following essential tasks:
 
 Creating a New User and Granting Root Privileges: Enhance security and control by creating a new user and assigning it root privileges.
@@ -26,7 +26,7 @@ Pulling the dotfile Repository from [GitHub](https://github.com/santiagopereda/d
 Creating Symlinks to the ~/.config Directory: Organize your configuration files by creating symbolic links to the `~/.config` directory.
 
 ## **Requirements**
----
+
 - [Ubuntu](https://www.ubuntu.com) or [Debian](https://www.debian.org) Linux
 - Bash shell
 - [Ansible](https://www.ansible.com) 2.8 or newer
@@ -43,7 +43,7 @@ This Ansible Playbook has been tested on the following Linux releases:
 I've used this playbook to install packages on Ubuntu running on Windows Subsystem for Linux on Windows 11.
 
 ## **Installation Instructions**
----
+
 To run the playbook, ensure that you have the latest version of Ansible installed. Please follow the steps below:
 
 ###  Installing Ansible
