@@ -1,7 +1,7 @@
 # **Ansible Development Environment Setup**
 ----
 
-This Ansible role is used to pull a remote copy of an [[Ansible]] playbook on a managed node that installs the packages, features, and configuration files required for my development environment from a source repository. This setup inverts the default push architecture of Ansible into a pull architecture, which offers near-limitless scaling potential.
+This Ansible role is used to pull a remote copy of an Ansible playbook on a managed node that installs the packages, features, and configuration files required for my development environment from a source repository. This setup inverts the default push architecture of Ansible into a pull architecture, which offers near-limitless scaling potential.
 
 ### **Features**
 ---
@@ -17,7 +17,7 @@ Installing [oh-my-zsh](https://github.com/ohmyzsh/) Plugins and [P10K](https://g
 
 Installing [pyenv](https://github.com/pyenv/pyenv) and pyenv-virtualenv Required Python Versions: Install pyenv, a flexible Python version management tool, and the specified Python interpreter versions.
 
-Setting [[Global Environment]] with Python Versions: Set the global environment to use the selected Python interpreter versions for consistent Python development.
+Setting Global Environment with Python Versions: Set the global environment to use the selected Python interpreter versions for consistent Python development.
 
 Managing Python Packages with pip: Install additional Python packages using the pip package manager.
 
@@ -40,7 +40,7 @@ This Ansible Playbook has been tested on the following Linux releases:
 
 ### Ubuntu on WSL
 
-I've used this playbook to install packages on Ubuntu running on [[Windows Subsystem for Linux]] on Windows 11.
+I've used this playbook to install packages on Ubuntu running on Windows Subsystem for Linux on Windows 11.
 
 ## **Installation Instructions**
 ---
